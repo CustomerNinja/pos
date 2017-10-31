@@ -115,7 +115,7 @@
          </font></Button>
       <Pane layoutX="720.0" layoutY="297.0" prefHeight="412.0" prefWidth="556.0" style="-fx-background-color: gray;">
          <children>
-            <Button layoutX="52.0" layoutY="57.0" mnemonicParsing="false" onAction="#adjustPriceButtonHandler" text="Adjust Price" />
+            <Button fx:id="adjustPriceButton" layoutX="52.0" layoutY="57.0" mnemonicParsing="false" onAction="#adjustPriceButtonHandler" text="Adjust Price" />
             <Button layoutX="151.0" layoutY="57.0" mnemonicParsing="false" onAction="#adjustQuantityButtonHandler" text="Adjust Quantity in Stock" />
             <Button layoutX="52.0" layoutY="296.0" mnemonicParsing="false" onAction="#addNewItemButtonHandler" text="Add New Item" />
             <Button layoutX="314.0" layoutY="57.0" mnemonicParsing="false" onAction="#adjustDiscountButtonHandler" text="Adjust Discount Value" />
