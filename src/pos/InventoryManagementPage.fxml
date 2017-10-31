@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pos.InventoryManagementPageController">
+   <children>
+      <Button layoutX="574.0" layoutY="686.0" mnemonicParsing="false" prefWidth="80.0" text="--&gt;" />
+      <MenuBar prefHeight="29.0" prefWidth="1280.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <ScrollPane layoutX="720.0" layoutY="29.0" prefHeight="260.0" prefWidth="556.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="193.0" prefWidth="536.0">
+               <children>
+                  <Pane layoutX="4.0" layoutY="4.0" prefHeight="200.0" prefWidth="538.0">
+                     <children>
+                        <ImageView id="selectedItemImage" fitHeight="80.0" fitWidth="80.0" layoutX="37.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Documents/Icon_Boost_EnergyDrink.png" />
+                           </image>
+                        </ImageView>
+                        <Text fx:id="selectedItemPriceText" layoutX="111.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$99.99" />
+                        <Text fx:id="selectedItemNameText" layoutX="40.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Name" />
+                        <Text layoutX="46.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item" textAlignment="CENTER">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="112.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="175.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity in Stock" textAlignment="CENTER">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="selectedItemStockText" layoutX="175.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <GridPane alignment="TOP_CENTER" gridLinesVisible="true" layoutX="15.0" layoutY="46.0" prefHeight="640.0" prefWidth="639.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" GridPane.halignment="CENTER">
+               <children>
+                  <Text layoutX="12.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Name" />
+                  <Text fill="RED" layoutY="49.0" stroke="WHITE" strokeType="OUTSIDE" text="999" />
+                  <ImageView fx:id="itemButton3" fitHeight="90.0" fitWidth="90.0" layoutX="13.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Documents/Icon_Boost_EnergyDrink.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </GridPane>
+      <Button layoutX="15.0" layoutY="686.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="&lt;--">
+         <font>
+            <Font name="System Font Regular" size="13.0" />
+         </font></Button>
+      <Pane layoutX="720.0" layoutY="297.0" prefHeight="412.0" prefWidth="556.0" style="-fx-background-color: gray;">
+         <children>
+            <Button layoutX="52.0" layoutY="57.0" mnemonicParsing="false" onAction="#adjustPriceButtonHandler" text="Adjust Price" />
+            <Button layoutX="151.0" layoutY="57.0" mnemonicParsing="false" onAction="#adjustQuantityButtonHandler" text="Adjust Quantity in Stock" />
+            <Button layoutX="52.0" layoutY="296.0" mnemonicParsing="false" onAction="#addNewItemButtonHandler" text="Add New Item" />
+            <Button layoutX="314.0" layoutY="57.0" mnemonicParsing="false" onAction="#adjustDiscountButtonHandler" text="Adjust Discount Value" />
+            <Button layoutX="52.0" layoutY="141.0" mnemonicParsing="false" onAction="#removeItemButtonHandler" text="Remove Selected Item from Inventory" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
