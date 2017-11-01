@@ -58,17 +58,17 @@ public class LoginController implements Initializable {
                System.out.println("Curent User: " + currentSession.currentUser.getName() );
                userLabel.setText(currentSession.currentUser.getName() );
 
-               Stage stage;
+               
                Parent root;
 
                //get refrence to stage
-               stage = (Stage) submit_button.getScene().getWindow();
+               Stage stage = (Stage) submit_button.getScene().getWindow();
 
-               root = FXMLLoader.load(getClass().getResource("InventoryPage.fxml"));
-
-               Scene scene = new Scene(root);
-               stage.setScene(scene);
+               stage.setScene( new Scene(InventoryPage.getPage(), 1280, 720));
+               stage.setTitle("CustomerNinja - Inventory");
                stage.show();
+
+             
                
            } else if (currentSession.getAdminStatus() == true) {
                //show the management window if the current user is a manager

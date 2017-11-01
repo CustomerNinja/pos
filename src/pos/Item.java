@@ -12,6 +12,7 @@ public class Item {
 	private NinjaConn njc;
 	private ResultSet rset;
 	private final String table = "tbInventory";
+        private String imgPath;
 	
 public Item(int id, NinjaConn njc) {
 		
@@ -27,6 +28,7 @@ public Item(int id, NinjaConn njc) {
 		quantity = rset.getInt("quantity");
 		price = rset.getDouble("price");
 		description = rset.getString("description");
+                imgPath = rset.getString("image_file");
 
 		
 		} catch (Exception ex) {
@@ -127,5 +129,9 @@ public Item(int id, NinjaConn njc) {
 		njc.updateDBString(this.table, "description", newDescription, this.id);
 		
 	}
+        
+        protected String getImagePath(){
+            return imgPath;
+        }
 	
 } //end Item class

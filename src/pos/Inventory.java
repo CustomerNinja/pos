@@ -54,7 +54,7 @@ public class Inventory {
             refreshInventory();
         }
         
-	public List<Item> getItemList() {
+	public LinkedList<Item> getItemList() {
 		return itemList;
 	}
 	
