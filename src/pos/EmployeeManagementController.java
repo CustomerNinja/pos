@@ -76,10 +76,10 @@ public class EmployeeManagementController implements Initializable {
         njc = new NinjaConn();
         
         njc.updateDBInt("tbUsers", "permissions", Integer.parseInt(newPermissionsField.getText() ), Integer.parseInt(employeeIDField.getText() ));
+        njc.close();
         
         stage = (Stage)employeeIDField.getScene().getWindow();
         stage.close();
-        
         
     }
     
