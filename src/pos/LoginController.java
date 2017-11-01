@@ -51,25 +51,45 @@ public class LoginController implements Initializable {
        
        //if the connection is valid = true
        if(currentSession.connectionValid){
-           //show the inventory window
-           System.out.println("The connection was valid");
-           System.out.println("Curent User: " + currentSession.currentUser.getName() );
-           userLabel.setText(currentSession.currentUser.getName() );
            
-           Stage stage;
-           Parent root;
-           
-           //refrence to stage
-           stage = (Stage) submit_button.getScene().getWindow();
-           
-           root = FXMLLoader.load(getClass().getResource("InventoryPage.fxml"));
-           
-           Scene scene = new Scene(root);
-           stage.setScene(scene);
-           stage.show();
+           if (currentSession.getAdminStatus() == false) {
+                //show the inventory window if the current user is an employee
+               System.out.println("The connection was valid");
+               System.out.println("Curent User: " + currentSession.currentUser.getName() );
+               userLabel.setText(currentSession.currentUser.getName() );
+
+               Stage stage;
+               Parent root;
+
+               //get refrence to stage
+               stage = (Stage) submit_button.getScene().getWindow();
+
+               root = FXMLLoader.load(getClass().getResource("InventoryPage.fxml"));
+
+               Scene scene = new Scene(root);
+               stage.setScene(scene);
+               stage.show();
+               
+           } else if (currentSession.getAdminStatus() == true) {
+               //show the management window if the current user is a manager
+               System.out.println("The connection was valid");
+               System.out.println("Curent User: " + currentSession.currentUser.getName() );
+               userLabel.setText(currentSession.currentUser.getName() );
+
+               Stage stage;
+               Parent root;
+
+               //get refrence to stage
+               stage = (Stage) submit_button.getScene().getWindow();
+
+               root = FXMLLoader.load(getClass().getResource("ManagerFunctionsNavPage.fxml"));
+
+               Scene scene = new Scene(root);
+               stage.setScene(scene);
+               stage.show();
+           }
         
-       }
-        if(!currentSession.connectionValid){
+       } else if(!currentSession.connectionValid){
            Alert alert = new Alert(AlertType.ERROR);
            alert.setTitle("Customer Ninja");
            alert.setContentText("Invalid Login Provided");

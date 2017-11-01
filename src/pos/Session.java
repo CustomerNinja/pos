@@ -41,8 +41,21 @@ public class Session {
                 
              //show the inventory page here 
             }
-        }catch(Exception e){System.out.println("you fail"); }
+        }catch(Exception e){
+            System.out.println("you fail"); 
+        } finally {
+            connection.close();
+        }
  
-    }    
+    }
+
+    protected Boolean getAdminStatus() {
+        return isAdmin;
+    }
+    
+    protected NinjaConn getConnection() {
+        return connection;
+    }
+    
 }
 
