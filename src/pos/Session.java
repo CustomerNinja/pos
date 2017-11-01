@@ -43,6 +43,11 @@ public class Session {
             }
         }catch(Exception e){System.out.println("you fail"); }
  
-    }    
+    }
+
+    protected Boolean getAdminStatus() {
+        return isAdmin;
+    }
+    
 }
 

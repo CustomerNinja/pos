@@ -82,7 +82,6 @@ public class InventoryManagementPageController implements Initializable {
         
         //selectedItem.setPrice(newPriceField.getText() );
         
-        
     }
     
     @FXML
