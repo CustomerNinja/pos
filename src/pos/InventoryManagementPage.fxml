@@ -119,7 +119,8 @@
             <Button layoutX="151.0" layoutY="57.0" mnemonicParsing="false" onAction="#adjustQuantityButtonHandler" text="Adjust Quantity in Stock" />
             <Button layoutX="52.0" layoutY="296.0" mnemonicParsing="false" onAction="#addNewItemButtonHandler" text="Add New Item" />
             <Button layoutX="314.0" layoutY="57.0" mnemonicParsing="false" onAction="#adjustDiscountButtonHandler" text="Adjust Discount Value" />
-            <Button layoutX="52.0" layoutY="141.0" mnemonicParsing="false" onAction="#removeItemButtonHandler" text="Remove Selected Item from Inventory" />
+            <Button layoutX="52.0" layoutY="194.0" mnemonicParsing="false" onAction="#removeItemButtonHandler" text="Remove Selected Item from Inventory" />
+            <Button layoutX="52.0" layoutY="115.0" mnemonicParsing="false" onAction="#adjustImageFileButtonHandler" text="Change Selected Item Image File" />
          </children>
       </Pane>
    </children>

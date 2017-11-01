@@ -44,6 +44,8 @@ public class InventoryManagementPageController implements Initializable {
     
     @FXML private TextField newDiscountField;
     
+    @FXML private TextField newImageField;
+    
     Stage stage;
     
     Parent root;
@@ -172,6 +174,32 @@ public class InventoryManagementPageController implements Initializable {
         //new controller??
         
         //njc.rmRowInventory(selectedItem.getID() );
+        
+    }
+    
+    @FXML
+    public void adjustImageFileButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Change Image File Button Clicked");
+        
+        //display adjust image file pop-up window
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("AdjustImageFilePopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Adjust Item Image File");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(adjustPriceButton.getScene().getWindow());
+        stage.showAndWait();
+            
+    }
+    
+    @FXML
+    public void setImageFileButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Set Image File Button Clicked");
+        
+        stage = (Stage)newImageField.getScene().getWindow();
+        stage.close();
         
     }
     
