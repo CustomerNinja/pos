@@ -82,7 +82,7 @@ public class LoginController implements Initializable {
                //get refrence to stage
                stage = (Stage) submit_button.getScene().getWindow();
 
-               root = FXMLLoader.load(getClass().getResource("InventoryManagementPage.fxml"));
+               root = FXMLLoader.load(getClass().getResource("ManagerFunctionsNavPage.fxml"));
 
                Scene scene = new Scene(root);
                stage.setScene(scene);

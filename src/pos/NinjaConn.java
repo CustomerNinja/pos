@@ -322,4 +322,20 @@ public class NinjaConn {
     	}
     }
     
+    public void close() {
+        
+        try {
+            
+            conn.close();
+            
+        } catch (Exception exc) {
+            
+            System.out.println("Close fail! " + exc.toString() );
+            
+        }
+        
+        
+    }
+    
+    
 } //end class
