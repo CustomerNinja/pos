@@ -13,8 +13,11 @@
          </font>
       </Label>
       <Button fx:id="changePermissionsButton" layoutX="262.0" layoutY="289.0" mnemonicParsing="false" text="Change Permission Level" onAction="#changePermissionsButtonHandler" />
-      <Button layoutX="562.0" layoutY="289.0" mnemonicParsing="false" text="Change Username" />
-      <Button layoutX="838.0" layoutY="289.0" mnemonicParsing="false" text="Change Name" />
-      <Button layoutX="262.0" layoutY="428.0" mnemonicParsing="false" text="Set New Password" />
+      <Button layoutX="562.0" layoutY="289.0" mnemonicParsing="false" text="Change Username" onAction="#changeUsernameButtonHandler" />
+      <Button layoutX="838.0" layoutY="289.0" mnemonicParsing="false" text="Change Name" onAction="#changeNameButtonHandler" />
+      <Button layoutX="262.0" layoutY="428.0" mnemonicParsing="false" text="Set New Password" onAction="#changePasswordButtonHandler" />
+      <Button layoutX="562.0" layoutY="428.0" mnemonicParsing="false" text="Add New Employee" onAction="#addNewUserButtonHandler" />
+      
+      <Button layoutX="562.0" layoutY="567.0" mnemonicParsing="false" text="Back to Manager Navigation Page" onAction="#toManagerNavPageButtonHandler" /> 
    </children>
 </Pane>
