@@ -87,7 +87,7 @@
                   <TextField fx:id="user_field" layoutX="41.0" layoutY="30.0" />
                   <Label layoutX="42.0" layoutY="66.0" text="Password:" />
                   <PasswordField fx:id="pw_field" layoutX="41.0" layoutY="89.0" />
-                  <Button layoutX="136.0" layoutY="142.0" onAction="#submitButtonClicked" text="Submit" fx:id="submit_button" />
+                  <Button layoutX="136.0" layoutY="142.0" defaultButton="true" onAction="#submitButtonClicked" text="Submit" fx:id="submit_button" />
                </children>
             </Pane>
          </children>
