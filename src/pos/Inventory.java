@@ -40,7 +40,7 @@ public class Inventory {
             	}
 
 		} catch (Exception exc) {
-			System.out.println("Inventory Consstruct fail! " + exc.toString() );
+			System.out.println("Inventory Construct fail! " + exc.toString() );
 		}
 	}
 	
