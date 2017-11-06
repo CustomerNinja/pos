@@ -44,12 +44,26 @@ public class EmployeeManagementController implements Initializable {
     @FXML
     private TextField nameField;
     
+    @FXML
+    private TextField addressField;
+    
+    @FXML
+    private TextField usernameField;
+    
+    @FXML
+    private TextField pw1Field;
+    
+    @FXML
+    private TextField pw2Field;
+    
+    @FXML
+    private TextField permField;
+    
     protected Stage stage;
     
     protected Parent root;
     
     private NinjaConn njc;
-    
     
     /**
      * Initializes the controller class.
@@ -152,6 +166,17 @@ public class EmployeeManagementController implements Initializable {
     public void setNewUserButtonHandler(ActionEvent event) throws IOException {
         
         System.out.println("Set New User Button Clicked");
+        
+        //String sql = "";
+        //sql = nameField.getText() + "," + addressField.getText() + "," + 
+        
+        
+        
+        
+        
+        
+        
+        
         
         stage = (Stage)nameField.getScene().getWindow();
         stage.close();
