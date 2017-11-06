@@ -117,7 +117,7 @@ public class NinjaConn {
     
     public void addRowInventory(String name, int quantity, double price, String description, int discount, String imgFile) {
     	try {
-    		sqlText = "INSERT INTO tbINVENTORY VALUES(NULL, \"" + name + "\", " + price + ", " + quantity +  ", \"" + description +  "\", " + discount +  ", \"" + imgFile + "\")";
+    		sqlText = "INSERT INTO tbINVENTORY VALUES(NULL, \"" + name + "\", " + quantity + ", " + price +  ", \"" + description +  "\", " + discount +  ", \"" + imgFile + "\")";
     		stmt.executeUpdate(sqlText);
     	} catch (Exception ex) {
     		System.out.println("Insert new row fail! " + ex.toString() );
