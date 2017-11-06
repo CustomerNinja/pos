@@ -166,21 +166,46 @@ public class EmployeeManagementController implements Initializable {
     public void setNewUserButtonHandler(ActionEvent event) throws IOException {
         
         System.out.println("Set New User Button Clicked");
+        Boolean isValid = false;
+        String sql = "";
         
-        //String sql = "";
-        //sql = nameField.getText() + "," + addressField.getText() + "," + 
+        try {
         
+            njc = new NinjaConn();
+
+            if (nameField.getText() != null && addressField.getText() != null && usernameField.getText() != null 
+               && pw1Field.getText() != null && permField.getText() != null) {
+
+                if (pw1Field.getText().equals(pw2Field.getText())) {
+                    
+                    sql = "\"" + nameField.getText() + "\", \"" + addressField.getText() + "\", 0, 0,\"" + 
+                        usernameField.getText() + "\", " + permField.getText() + ", " + "0, 0";
+
+                    njc.addRowUsers(sql);
+                    njc.eAndStore(nameField.getText(), pw1Field.getText());
+                    isValid = true;
+
+                } else {
+                    System.out.println("Error: Password Fields Do Not Match!");
+                }
+
+            } else {
+
+                System.out.println("Error: Data is Required for All Fields!");
+
+            }
+            
+        } catch(Exception exc) {
+            System.out.println("Add New User Handler Error! " + exc.toString());
+        }
         
-        
-        
-        
-        
-        
-        
-        
-        stage = (Stage)nameField.getScene().getWindow();
-        stage.close();
-        
+        njc.close();
+        if (isValid) {
+            
+            stage = (Stage)nameField.getScene().getWindow();
+            stage.close();
+
+        }
     }
     
     public void toManagerNavPageButtonHandler(ActionEvent event) throws IOException {

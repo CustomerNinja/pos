@@ -143,7 +143,15 @@ public class NinjaConn {
     }
     
     public void addRowUsers(String input) {
-        sqlText = "INSERT INTO tbUSERS VALUES(NULL," + input + ")";
+        
+        try {
+
+            sqlText = "INSERT INTO tbUSERS VALUES(NULL," + input + ")";
+            stmt.executeUpdate(sqlText);
+            
+        } catch(Exception exc) {
+            System.out.println("addRowUsers Error! " + exc.toString());
+        }
     }
     
     
@@ -177,7 +185,7 @@ public class NinjaConn {
     /*DO NOT USE THE BELOW METHOD!!!!!!!
     * IT IS STIL EXPERIMENTAL!!
     */ 
-    public String getDPW(String name) {
+    private String getDPW(String name) {
     	
     	//AES with GCM: much stronger encryption but DOES NOT WORK YET
     	rSet = quName(name, "tbUsers");
