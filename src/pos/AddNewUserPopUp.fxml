@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="321.0" prefWidth="352.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pos.EmployeeManagementController">
+   <children>
+      <TextField fx:id="nameField" layoutX="151.0" layoutY="119.0" />
+      <Label layoutX="95.0" layoutY="75.0" text="Employee Name:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="123.0" text="Enter Employee ID # :" />
+      <TextField fx:id="addressField" layoutX="151.0" layoutY="161.0" />
+      <Label layoutX="26.0" layoutY="165.0" text="Employee Address:" />
+      <TextField fx:id="usernameField" layoutX="151.0" layoutY="203.0" />
+      <Label layoutX="26.0" layoutY="207.0" text="Employee Username:" />
+      <Button layoutX="199.0" layoutY="242.0" mnemonicParsing="false" text="OK" onAction="#setNewUserButtonHandler" />
+   </children>
+</Pane>

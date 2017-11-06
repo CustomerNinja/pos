@@ -35,6 +35,15 @@ public class EmployeeManagementController implements Initializable {
     @FXML
     private Button changePermissionsButton;
     
+    @FXML
+    private TextField oldPasswordField;
+    
+    @FXML
+    private TextField newPasswordField;
+    
+    @FXML
+    private TextField nameField;
+    
     protected Stage stage;
     
     protected Parent root;
@@ -83,5 +92,86 @@ public class EmployeeManagementController implements Initializable {
         
     }
     
+    public void changeUsernameButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Change Username Button Clicked");
+        
+        
+    }
     
-}
+    public void changeNameButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Change Name Button Clicked");
+        
+        
+    }        
+    
+    public void changePasswordButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Change Password Button Clicked");
+        
+        //display change password pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("ChangePasswordPopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Set New Password");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(changePermissionsButton.getScene().getWindow());
+        stage.showAndWait();
+        
+    }
+    
+    public void setNewPasswordButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Set Password Button clicked");
+        
+        //DO NOTHING
+        //need to figure out how to safely do this
+        
+        //close change password pop-up
+        stage = (Stage)employeeIDField.getScene().getWindow();
+        stage.close();
+        
+    }
+    
+    public void addNewUserButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Add New User Button Clicked");
+        
+        //display change password pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("AddNewUserPopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Add New User");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(changePermissionsButton.getScene().getWindow());
+        stage.showAndWait();
+        
+    }
+    
+    public void setNewUserButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Set New User Button Clicked");
+        
+        stage = (Stage)nameField.getScene().getWindow();
+        stage.close();
+        
+    }
+    
+    public void toManagerNavPageButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Back to Manager Nav Page (from Employee Mgmt) Button Clicked");
+        
+        //get refrence to stage
+        stage = (Stage)changePermissionsButton.getScene().getWindow();
+
+        root = FXMLLoader.load(getClass().getResource("ManagerFunctionsNavPage.fxml"));
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        
+        
+    }
+    
+} //end controller
