@@ -59,6 +59,12 @@ public class EmployeeManagementController implements Initializable {
     @FXML
     private TextField permField;
     
+    @FXML
+    private TextField nu1Field;
+    
+    @FXML
+    private TextField nu2Field;
+    
     protected Stage stage;
     
     protected Parent root;
@@ -109,8 +115,51 @@ public class EmployeeManagementController implements Initializable {
     public void changeUsernameButtonHandler(ActionEvent event) throws IOException {
         
         System.out.println("Change Username Button Clicked");
+        //display change username pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("ChangeUsernamePopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Change Employee Username");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(changePermissionsButton.getScene().getWindow());
+        stage.showAndWait();
         
+    }
+    
+    public void setNewUsernameButtonHandler(ActionEvent event) throws IOException {
         
+        System.out.println("Set New Username Button Clicked");
+        Boolean isValid = false;
+        User user;
+        
+        try {
+            
+            njc = new NinjaConn();
+
+            if (nu1Field.getText().equals(nu2Field.getText()) ) {
+                
+                user = new User(usernameField.getText(), njc);
+                
+                njc.updateDBString("tbUsers", "username", nu1Field.getText(), user.getID());
+                
+                isValid = true;
+                
+            } else {
+                System.out.println("Error: New Username Fields Do Not Match!");
+            }
+            
+        } catch(Exception exc) {
+            System.out.println("setNewUsername fail! " + exc.toString());
+        } finally {
+            njc.close();
+            user = null;
+        }
+        
+        if (isValid) {
+
+            stage = (Stage)nu1Field.getScene().getWindow();
+            stage.close();
+        }
     }
     
     public void changeNameButtonHandler(ActionEvent event) throws IOException {
@@ -173,8 +222,8 @@ public class EmployeeManagementController implements Initializable {
         
             njc = new NinjaConn();
 
-            if (nameField.getText() != null && addressField.getText() != null && usernameField.getText() != null 
-               && pw1Field.getText() != null && permField.getText() != null) {
+            if ( (nameField.getLength() > 0) && (addressField.getLength() > 0) && (usernameField.getLength() > 0) 
+               && (pw1Field.getLength() > 0) && (permField.getLength() > 0) ) {
 
                 if (pw1Field.getText().equals(pw2Field.getText())) {
                     
