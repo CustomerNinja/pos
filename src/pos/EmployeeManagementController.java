@@ -96,8 +96,6 @@ public class EmployeeManagementController implements Initializable {
         stage.initOwner(changePermissionsButton.getScene().getWindow());
         stage.showAndWait();
         
-        
-        
     }
     
     @FXML

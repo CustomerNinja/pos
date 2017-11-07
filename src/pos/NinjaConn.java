@@ -120,16 +120,16 @@ public class NinjaConn {
     		sqlText = "INSERT INTO tbINVENTORY VALUES(NULL, \"" + name + "\", " + quantity + ", " + price +  ", \"" + description +  "\", " + discount +  ", \"" + imgFile + "\")";
     		stmt.executeUpdate(sqlText);
     	} catch (Exception ex) {
-    		System.out.println("Insert new row fail! " + ex.toString() );
+    		System.out.println("Insert new Inventory row fail! " + ex.toString() );
     	}
     }
     
-    public void addRowCustomers(String name, int quantity, double price, String description, int discount, String imgFile) {
+    public void addRowCustomers(String name, String address) {
     	try {
-    		sqlText = "INSERT INTO tbCUSTOMERS VALUES(NULL, \"" + name + "\", " + price + ", \"" + description +  "\", " + discount +  ", \"" + imgFile + "\")";
+    		sqlText = "INSERT INTO tbCUSTOMERS VALUES(NULL, \"" + name + "\", \"" + address + "\", 0, 0)";
     		stmt.executeUpdate(sqlText);
     	} catch (Exception ex) {
-    		System.out.println("Insert new row fail! " + ex.toString() );
+    		System.out.println("Insert new Customer row fail! " + ex.toString() );
     	}
     }
     
@@ -138,7 +138,7 @@ public class NinjaConn {
     		sqlText = "INSERT INTO tbSALES VALUES(NULL, " + amount + ", \"" + items +  "\", " + customer + "\")";
     		stmt.executeUpdate(sqlText);
     	} catch (Exception ex) {
-    		System.out.println("Insert new row fail! " + ex.toString() );
+    		System.out.println("Insert new Sales row fail! " + ex.toString() );
     	}
     }
     

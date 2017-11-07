@@ -12,7 +12,7 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <Button fx:id="changePermissionsButton" layoutX="262.0" layoutY="289.0" mnemonicParsing="false" text="Change Customer Name" onAction="#changeCustomerNameButtonHandler" />
+      <Button layoutX="262.0" layoutY="289.0" mnemonicParsing="false" text="Change Customer Name" onAction="#changeCustomerNameButtonHandler" />
       <Button layoutX="562.0" layoutY="289.0" mnemonicParsing="false" text="Change Customer Address" onAction="#changeAddressButtonHandler" />
       <Button layoutX="838.0" layoutY="289.0" mnemonicParsing="false" text="Change Customer Number of Sales" onAction="#changeSalesNumButtonHandler" />
       <Button layoutX="262.0" layoutY="428.0" mnemonicParsing="false" text="Change Customer Total Sales Value" onAction="#changeSalesValButtonHandler" />

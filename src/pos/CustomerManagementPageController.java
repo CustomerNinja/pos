@@ -15,6 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -30,9 +32,29 @@ public class CustomerManagementPageController implements Initializable {
     @FXML
     private Button changeNameButton;
     
+    @FXML
+    private TextField nameField;
+    
+    @FXML
+    private TextField addressField;
+    
+    @FXML
+    private TextField newNameField;
+    
+    @FXML
+    private TextField newAddrField;
+    
+    @FXML
+    private TextField newSalesNumField;
+    
+    @FXML
+    private TextField newSalesValField;
+    
     private Stage stage;
     
     private Parent root;
+    
+    private NinjaConn njc;
     
     /**
      * Initializes the controller class.
@@ -56,27 +78,255 @@ public class CustomerManagementPageController implements Initializable {
         stage.setScene(scene);
         stage.show();
         
-        
     }
      
     public void changeCustomerNameButtonHandler(ActionEvent event) throws IOException {
         
+        System.out.println("Change Customer Name Button Clicked");
+        
+        //display change name pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("ChangeCustomerNamePopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Change Customer Name");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(backToNavButton.getScene().getWindow());
+        stage.showAndWait();
+        
+        
     }
     
+    public void setNewNameButtonHander(ActionEvent event) throws IOException {
+        
+        System.out.println("Set New Customer Name Button Clicked");
+        Boolean isValid = false;
+        Customer cust;
+        
+        if ( (nameField.getLength() > 0) && (newNameField.getLength() > 0) ) {
+            
+            try {
+                
+                njc  = new NinjaConn();
+                
+                cust = new Customer(nameField.getText(), njc);
+                
+                njc.updateDBString("tbCustomers", "name", newNameField.getText(), cust.getID());
+                
+                isValid = true;
+                
+            } catch(Exception exc) {
+                System.out.println("Set New Customer Name Fail! " + exc.toString());
+            } finally {
+                njc.close();
+                cust = null;
+            }
+            
+        } else {
+            System.out.println("Error: enter valid data in all fields!");
+        }
+        
+        if (isValid) {
+            stage = (Stage)newNameField.getScene().getWindow();
+            stage.close();
+        }
+    }
     public void changeAddressButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Change Customer Address Button Clicked");
+        
+        //display change address pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("ChangeCustomerAddressPopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Change Customer Address");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(backToNavButton.getScene().getWindow());
+        stage.showAndWait();
+        
+    }
+    
+    public void setNewAddressButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Set New Customer Address Button Clicked");
+        Boolean isValid = false;
+        Customer cust;
+        
+        if ( (nameField.getLength() > 0) && (newAddrField.getLength() > 0) ) {
+            
+            try {
+                
+                njc = new NinjaConn();
+                
+                cust = new Customer(nameField.getText(), njc);
+                
+                njc.updateDBString("tbCustomers", "address", newAddrField.getText(), cust.getID());
+                
+                isValid = true;
+                
+            } catch(Exception exc) {
+                System.out.println("Set New Customer Address Fail! " + exc.toString());
+            } finally {
+                njc.close();
+                cust = null;
+            }
+            
+        } else {
+            System.out.println("Error: enter valid data for all fields!");
+        }
+        
+        if (isValid) {
+            stage = (Stage)newAddrField.getScene().getWindow();
+            stage.close();
+        }
         
     }
     
     public void changeSalesNumButtonHandler(ActionEvent event) throws IOException {
         
+        System.out.println("Change Customer Sales Number Button Clicked");
+        
+        //display change sales num pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("ChangeCustomerSalesNumPopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Change Customer Sales Number");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(backToNavButton.getScene().getWindow());
+        stage.showAndWait();
+        
+    }
+    
+    public void setNewSalesNumButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Set Customer Sales Number Button Clicked");
+        Boolean isValid = false;
+        Customer cust;
+        
+        if ( (nameField.getLength() > 0) && (newSalesNumField.getLength() > 0) ) {
+            
+            try {
+                 
+                njc = new NinjaConn();
+                
+                cust = new Customer(nameField.getText(), njc);
+                
+                njc.updateDBInt("tbCustomers", "sales", Integer.parseInt(newSalesNumField.getText() ), cust.getID() );
+                
+                isValid = true;
+                
+            } catch(Exception exc) {
+                System.out.println("Set New Customer Sales Num Fail! " + exc.toString());
+            } finally {
+                njc.close();
+                cust = null;
+            }
+            
+        } else {
+            System.out.println("Error: enter valid data for all fields!");
+        }
+        
+        if (isValid) {
+            stage = (Stage)newSalesNumField.getScene().getWindow();
+            stage.close();
+        }
+        
     }
     
     public void changeSalesValButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Change Customer Sales Value Button Clicked");
+        
+        //display change sales val pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("ChangeCustomerSalesValPopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Change Customer Total Sales Value");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(backToNavButton.getScene().getWindow());
+        stage.showAndWait();
+           
+    }
+    
+    public void setNewSalesValButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Set New Customer Sales Value Button Clicked");
+        Boolean isValid = false;
+        Customer cust;
+        
+        if ( (nameField.getLength() > 0) && (newSalesValField.getLength() > 0) ) {
+            
+            try {
+                
+                njc = new NinjaConn();
+                
+                cust = new Customer(nameField.getText(), njc);
+                
+                njc.updateDBDouble("tbCustomers", "sales_val", Double.parseDouble(newSalesValField.getText() ), cust.getID() );
+                
+                isValid = true;
+                
+            } catch(Exception exc) {
+                System.out.println("Set New Sales Value Fail! " + exc.toString());
+            } finally {
+                njc.close();
+            }
+            
+        } else {
+            System.out.println("Error: eneter valid data for all fields!");
+        }
+        
+        if (isValid) {
+            stage = (Stage)newSalesValField.getScene().getWindow();
+            stage.close();
+        }
         
     }
             
     public void addNewCustomerButtonHandler(ActionEvent event) throws IOException {
         
+        System.out.println("Add New Customer Button Clicked");
+        
+        //display add new customer pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("AddNewCustomerPopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Add New Customer to Database");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(backToNavButton.getScene().getWindow());
+        stage.showAndWait();
+        
     }
     
-}
+    public void setNewCustomerButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Set New Customer Button Clicked");
+        Boolean isValid = false;
+        
+        if ( (nameField.getLength() > 0) && (addressField.getLength() > 0) ) {
+            
+            try {
+                
+                njc = new NinjaConn();
+                
+                njc.addRowCustomers(nameField.getText(), addressField.getText());
+               
+                isValid = true;
+                
+            } catch(Exception exc) {
+                System.out.println("Add New Customer Fail! " + exc.toString());
+            } finally {
+                njc.close();
+            }
+            
+        } else {
+            System.out.println("Error: All fields must include valid data!");
+        }
+        
+        if (isValid) {
+            stage = (Stage)nameField.getScene().getWindow();
+            stage.close();
+        }
+        
+    }
+    
+}// end controller class
