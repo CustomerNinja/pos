@@ -36,12 +36,6 @@ public class EmployeeManagementController implements Initializable {
     private Button changePermissionsButton;
     
     @FXML
-    private TextField oldPasswordField;
-    
-    @FXML
-    private TextField newPasswordField;
-    
-    @FXML
     private TextField nameField;
     
     @FXML
