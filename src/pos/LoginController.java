@@ -44,7 +44,7 @@ public class LoginController implements Initializable {
    @FXML private Label userLabel;
     
    @FXML
-   public void submitButtonClicked(ActionEvent event) throws IOException {
+   public void submitButtonClicked(ActionEvent event) throws IOException, Exception {
        
        //attempt to create a new session
        Session currentSession = new Session(user_field.getText(),pw_field.getText());
@@ -63,35 +63,34 @@ public class LoginController implements Initializable {
 
                //get refrence to stage
                Stage stage = (Stage) submit_button.getScene().getWindow();
+               
+               
+               //test new pages here
+               
 
-               stage.setScene( new Scene(InventoryPage.getPage(), 1280, 720));
-               stage.setTitle("CustomerNinja - Inventory");
-               stage.show();
+                                //Pos.changeScene(InventoryManagementPage.getPage(0),"CustomerNinja - Inventory");
+
+               Pos.changeScene(InventoryPage.getPage(),"CustomerNinja - Inventory");
+
 
              
                
            } else if (currentSession.getAdminStatus() == true) {
                //show the management window if the current user is a manager
                System.out.println("The connection was valid");
-               System.out.println("Curent User: " + currentSession.currentUser.getName() );
+               System.out.println("Current User: " + currentSession.currentUser.getName() );
                userLabel.setText(currentSession.currentUser.getName() );
 
                Stage stage;
                Parent root;
 
-               //get refrence to stage
-               stage = (Stage) submit_button.getScene().getWindow();
+               Pos.changeScene(InventoryManagementPage.getPage(0),"CustomerNinja - Inventory");
 
-               root = FXMLLoader.load(getClass().getResource("ManagerFunctionsNavPage.fxml"));
-
-               Scene scene = new Scene(root);
-               stage.setScene(scene);
-               stage.show();
            }
         
        } else if(!currentSession.connectionValid){
            Alert alert = new Alert(AlertType.ERROR);
-           alert.setTitle("Customer Ninja");
+           alert.setTitle("Error");
            alert.setContentText("Invalid Login Provided");
            alert.showAndWait();
            System.out.println("Connection invalid");

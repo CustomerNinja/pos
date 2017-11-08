@@ -12,14 +12,14 @@ public class User {
 	private double salesVal;
 	private int permissions;
 	private String username;
-	private NinjaConn njc;
+	//private NinjaConn njc;
 	private ResultSet rSet;
 	private final String table = "tbUSERS";
 	
-	public User(int id, NinjaConn njc) {
-			
+	public User(int id) {
+			NinjaConn njc = new NinjaConn();
 			this.id = id;
-			this.njc = njc;
+			//this.njc = njc;
 			//rSet = null;
 			try {
 			
@@ -34,13 +34,14 @@ public class User {
 			} catch (Exception ex) {
 				System.out.println("User Construct Fail!  " + ex.toString() );
 			}
+                        njc.close();
 			
 	}
 	
-	public User(String uname, NinjaConn njc) {
-		
+	public User(String uname) {
+		NinjaConn njc = new NinjaConn();
 		this.username = uname;
-		this.njc = njc;
+		//this.njc = njc;
                 //rSet = null;
 		try {
 			rSet = njc.quUname(this.username, this.table);
@@ -55,6 +56,7 @@ public class User {
 			} catch (Exception ex) {
 				System.out.println("User Construct Fail!  " + ex.toString() );
 			}
+                njc.close();
 	}
 	
 	protected int getID() {
@@ -100,48 +102,49 @@ public class User {
 	}
 	
 	protected void setName(String newName) {
-		
+		NinjaConn njc = new NinjaConn();	
 		name = newName;
 		njc.updateDBString(this.table, "name", newName, this.id);
-		
+                njc.close();
 	}
 
 	protected void setAddress(String newAddr) {
-		
+		NinjaConn njc = new NinjaConn();	
 		address = newAddr;
 		njc.updateDBString(this.table, "address", newAddr, this.id);
-		
+                njc.close();
 	}
 
 	protected void setSalesNum(int newSalesNum) {
-		
+		NinjaConn njc = new NinjaConn();	
 		salesNum = newSalesNum;
 		njc.updateDBInt(this.table, "sales", newSalesNum, this.id);
-		
+	        njc.close();	
 	}
 	
 	protected void setSalesVal(double newSalesVal) {
-		
+		NinjaConn njc = new NinjaConn();	
 		salesVal = newSalesVal;
 		njc.updateDBDouble(this.table, "sales_val", this.salesVal, this.id);
-		
+	        njc.close();	
 	}
 	
 	protected void setPermissions(int newPermissions) {
-		
+		NinjaConn njc = new NinjaConn();	
                 if (this.permissions == 1) {
                     permissions = newPermissions;
                     njc.updateDBInt(this.table, "permissions", newPermissions, this.id);
                 }
-		
+	        njc.close();	
 	}
 	
 	protected void setUsername(String newUsername) {
-		
+		NinjaConn njc = new NinjaConn();	
                 if (this.permissions == 1) {
                     username = newUsername;
                     njc.updateDBString(this.table, "username", newUsername, this.id);
                 }
+                njc.close();        
 	}
 	
 } //end User

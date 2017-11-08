@@ -13,13 +13,13 @@ public class Session {
     private boolean isAdmin = false;
     protected User currentUser;
     
-    NinjaConn connection;
+    //NinjaConn connection;
     
     public boolean connectionValid;
     
     
     public Session(String aUsername, String aPassword){
-       
+       	NinjaConn connection = new NinjaConn();
         try{
        
             connection = new NinjaConn();
@@ -31,7 +31,7 @@ public class Session {
                 }
 
                 //create the employee/manager object
-                currentUser = new User(aUsername,connection);
+                currentUser = new User(aUsername);
                 // if the database returns admin flag then set the admin boolean
                 if(currentUser.getPermissions() == 1){
                     isAdmin = true;
@@ -53,9 +53,7 @@ public class Session {
         return isAdmin;
     }
     
-    protected NinjaConn getConnection() {
-        return connection;
-    }
+   
     
 }
 

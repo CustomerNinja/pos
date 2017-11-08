@@ -14,8 +14,8 @@ public class Item {
 	private final String table = "tbInventory";
         private String imgPath;
 	
-public Item(int id, NinjaConn njc) {
-		
+public Item(int id) {
+		NinjaConn njc = new NinjaConn();
 		this.id = id;
 		this.njc = njc;
 		rset = null;
@@ -34,10 +34,10 @@ public Item(int id, NinjaConn njc) {
 		} catch (Exception ex) {
 			System.out.println("Item Construct Fail!  " + ex.getLocalizedMessage() );
 		}
-		
+		njc.close();
 	}
 	
-	public Item(String name, NinjaConn njc) {
+	public Item(String name) {
 		
 		this.name = name;
 		this.njc = njc;
@@ -55,8 +55,10 @@ public Item(int id, NinjaConn njc) {
 		} catch (Exception ex) {
 			System.out.println("Item Construct Fail!  " + ex.getLocalizedMessage() );
 		}
-		
+		njc.close();
 	}
+        
+        
 	
 	
 	protected int getID() {
@@ -96,38 +98,39 @@ public Item(int id, NinjaConn njc) {
 	}
 
 	protected void setName(String newName) {
-		
+		NinjaConn njc = new NinjaConn();	
 		name = newName;
 		njc.updateDBString(this.table, "name", newName, this.id);
-		
+		njc.close();	
 	}
 
 	protected void setQuantity(int newQuantity) {
-		
+		NinjaConn njc = new NinjaConn();	
 		quantity = newQuantity;
 		njc.updateDBInt(this.table, "quantity", newQuantity, this.id);
-		
+		njc.close();	
 	}
 
 	protected void setPrice(double newPrice) {
 		
 		price = newPrice;
 		njc.updateDBDouble(this.table, "price", newPrice, this.id);
-		
+		njc.close();	
 	}
 	
 	protected void setOnSale(int newOnSale) {
-		
+		NinjaConn njc = new NinjaConn();
 		onSale = newOnSale;
 		njc.updateDBInt(this.table, "sale_item", newOnSale, this.id);
-		
+		njc.close();
+
 	}
 	
 	protected void setDescription(String newDescription) {
-		
+		NinjaConn njc = new NinjaConn();	
 		description = newDescription;
 		njc.updateDBString(this.table, "description", newDescription, this.id);
-		
+		njc.close();	
 	}
         
         protected String getImagePath(){

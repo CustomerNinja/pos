@@ -2,26 +2,27 @@ package pos;
 
 import java.sql.*;
 import java.util.LinkedList;
-import java.util.List;
-//import java.util.Arrays;
 
 public class Inventory {
 	
     private final String table = "tbInventory";
-    private NinjaConn njc;
+    //private NinjaConn njc;
     private ResultSet rSet;
     protected LinkedList<Item> itemList;
     private int[] idList;
     private int rows;
     
-	public Inventory(NinjaConn njc) {
-		this.njc = njc;
+        protected NinjaConn getNinjaConn(){
+            NinjaConn njc = new NinjaConn();
+            return njc;
+        }
+    
+	protected Inventory(NinjaConn njc) {
+		//this.njc = njc;
 		itemList = new LinkedList<Item>();
 		rows = 0;
-		//System.out.println("got njc");
 		try {
 			rSet = njc.quGetAll(this.table);
-			//System.out.println("got rSet");
             	while (rSet.next() ) {
             		rows++;
                 }
@@ -36,30 +37,40 @@ public class Inventory {
             	}
             	//System.out.println(Arrays.toString(idList) );
             	for (int i=0; i<rows; i++) {
-            		itemList.add(new Item(idList[i], njc) );
+            		itemList.add(new Item(idList[i]) );
             	}
 
 		} catch (Exception exc) {
 			System.out.println("Inventory Construct fail! " + exc.toString() );
 		}
+                njc.close();
+
 	}
 	
-	public void addNewItem(String name, int quantity, double price, String description, int discount, String imgFile) {
-            njc.addRowInventory(name, quantity, price, description, discount, imgFile);
-            refreshInventory();
-	}
-	
-        public void rmItem(int id) {
-            njc.rmRowInventory(id);
-            refreshInventory();
+        public void print(){
+            
         }
         
-	public LinkedList<Item> getItemList() {
+	protected void addNewItem(String item_title, int item_quantity, double price, String description, int discount, String image_filename) {
+            NinjaConn njc = this.getNinjaConn();
+            njc.addRowInventory(item_title, item_quantity, price, description, discount, image_filename);
+            refreshInventory();
+	}
+	
+        protected void rmItem(int id) {
+            NinjaConn njc = this.getNinjaConn();
+            njc.rmRowInventory(id);
+            refreshInventory();
+            njc.close();
+
+        }
+        
+	protected LinkedList<Item> getItemList() {
 		return itemList;
 	}
 	
         protected void refreshInventory() {
-                
+                NinjaConn njc = this.getNinjaConn();
                 itemList = new LinkedList<Item>();
 		rows = 0;
 		//System.out.println("got njc");
@@ -80,12 +91,14 @@ public class Inventory {
             	}
             	//System.out.println(Arrays.toString(idList) );
             	for (int i=0; i<rows; i++) {
-            		itemList.add(new Item(idList[i], njc) );
+            		itemList.add(new Item(idList[i]) );
             	}
 
 		} catch (Exception exc) {
 			System.out.println("Inventory Refresh fail! " + exc.toString() );
 		}
+                njc.close();
+
         }
 	
 }

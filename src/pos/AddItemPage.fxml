@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pos.AddItemPageController">
+   <children>
+      <VBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="480.0" prefWidth="640.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="80.0" prefWidth="320.0">
+                     <children>
+                        <Label alignment="TOP_LEFT" text="Item Title:">
+                           <VBox.margin>
+                              <Insets left="50.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField id="item_title_field" fx:id="item_title_field" alignment="TOP_LEFT" maxWidth="200.0" prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets left="50.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label alignment="TOP_LEFT" text="Unit Price:">
+                           <VBox.margin>
+                              <Insets left="50.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField id="item_price_field" fx:id="item_price_field" alignment="TOP_LEFT" maxWidth="200.0">
+                           <VBox.margin>
+                              <Insets left="50.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label alignment="TOP_LEFT" text="Quantity:">
+                           <VBox.margin>
+                              <Insets left="50.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField id="item_quantity_field" fx:id="item_quantity_field" alignment="TOP_LEFT" maxWidth="200.0">
+                           <VBox.margin>
+                              <Insets left="50.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="80.0" prefWidth="320.0">
+                     <children>
+                        <ImageView id="image_preview" fx:id="item_preview" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button id="select_image_button" mnemonicParsing="false" onAction="#SelectImageButtonHandler" text="Select Image" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Label text="Item Description:" />
+            <TextArea id="item_description_field" fx:id="item_description_field" maxWidth="400.0" prefHeight="200.0" prefWidth="200.0" />
+            <Button id="confirm_button" fx:id="confirm_button" alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#ConfirmButtonHandler" text="Confirm">
+               <VBox.margin>
+                  <Insets left="500.0" />
+               </VBox.margin>
+            </Button>
+            <CheckBox id="sale_checkbox" fx:id="sale_checkbox" mnemonicParsing="false" text="Sale Item" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
