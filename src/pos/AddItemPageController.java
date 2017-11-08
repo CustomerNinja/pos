@@ -60,17 +60,7 @@ public class AddItemPageController{
      * @throws IOException
      */
     public void ConfirmButtonHandler(ActionEvent event) throws IOException, Exception{
-//        event.getSource().getScene().getWindow().item_title_field.getText();
-//        String item_title = new AddItemPageController().item_title_field.getText();
-//        String item_quantity = new AddItemPageController().item_quantity_field.getText();
-//        String description = new AddItemPageController().item_description_field.getText();
-//        String item_price = new AddItemPageController().item_price_field.getText();
-        
-//        
-//        int quantity = Integer.parseInt(item_quantity);
-//        double price = Double.parseDouble(item_price);
-        
-        System.out.println("poop: " + image_filename);    
+
 
         //check to see if the imagefilename and other values are valid
         if((image_filename).equals("")){
@@ -113,14 +103,6 @@ public class AddItemPageController{
            return;
         }
      
-     
-        
-
-//            item_quantity = Integer.parseInt(item_quantity_field.getText());
-//            price = Double.parseDouble(item_price_field.getText());
-//            description = item_description_field.getText();
-        
-        
         //0 if the item is not a sale item, 1 if the item is a sale item
         int discount = 0;
         if(sale_checkbox.isSelected()){
@@ -130,35 +112,14 @@ public class AddItemPageController{
         //I'm using a little hack here to utilize non-static method in a static context
         NinjaConn njc = new NinjaConn();
         new Inventory(njc).addNewItem(item_title_field.getText(), Integer.parseInt(item_quantity_field.getText()),
-                Double.parseDouble(item_price_field.getText()), item_description_field.getText(), discount, image_filename );
-        
+            Double.parseDouble(item_price_field.getText()), item_description_field.getText(), discount, image_filename);
 
-        //new Inventory(njc).addNewItem(item_price_field.getText(), Integer.parseInt(item_quantity_field.getText()), Double.parseDouble(item_price_field.getText()), item_description_field.getText(), discount, image_filename+fileExtension);
         njc.close();
 
-       // System.out.println(Inventory.print());
-//refresh the gridpane on the current page
-        
-       // System.out.println(Stage.class.cast(Control.class.cast(event.getSource()).getScene().getWindow()).getClass());
-        
-       
-//        
-//        //if the page that called this was a manager
-//        if()
-//        Pos.changeScene(InventoryManagementPage.getPage(0),"CustomerNinja - Inventory");
-//
-//        //if the page that called this was not a manager
-//        Pos.changeScene(InventoryPage.getPage(),"CustomerNinja - Inventory");
-
-     
-        
-
-        
     }
     
     //returns the image string
      public void SelectImageButtonHandler(ActionEvent event) throws IOException{
-        String temp = "";
         FileChooser filechooser = new FileChooser();
         filechooser.setTitle("Select New Image");
         
@@ -166,24 +127,11 @@ public class AddItemPageController{
         Stage stage = Stage.class.cast(Control.class.cast(event.getSource()).getScene().getWindow());
         File image_file = filechooser.showOpenDialog(stage); 
         
-        temp = image_file.getPath();
-        
-        //get the extension
-        if(temp.contains(".") && temp.lastIndexOf(".")!= 0)
-		{
-                    fileExtension = temp.substring(temp.lastIndexOf(".")+1);
-		}
-        //set the image name string for the database
-        
-        
-       
         //move the image
         java.nio.file.Path path = Paths.get(IMAGE_DIRECTORY);
         Files.move(image_file.toPath(),path.resolve(image_file.getName()));
         
-        System.out.println("Selecting image: " + image_file.getName()); //+ fileExtension);
-
-        this.image_filename = image_file.getName(); //+ fileExtension;
+        this.image_filename = image_file.getName();
 
         
      }
