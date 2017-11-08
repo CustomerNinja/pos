@@ -139,7 +139,7 @@ public class EmployeeManagementController implements Initializable {
 
             if (nu1Field.getText().equals(nu2Field.getText()) ) {
                 
-                user = new User(usernameField.getText(), njc);
+                user = new User(usernameField.getText());
                 
                 njc.updateDBString("tbUsers", "username", nu1Field.getText(), user.getID());
                 
@@ -190,7 +190,7 @@ public class EmployeeManagementController implements Initializable {
             
             if ( (usernameField.getLength() > 0) && (new1Field.getLength() > 0) && (new2Field.getLength() > 0) )  {
             
-                user = new User(usernameField.getText(), njc);
+                user = new User(usernameField.getText());
                    
                 if (new1Field.getText().equals(new2Field.getText())) {
                     
@@ -251,7 +251,7 @@ public class EmployeeManagementController implements Initializable {
             
             if ( (usernameField.getLength() > 0) && (pw0Field.getLength() > 0) && (pw1Field.getLength() > 0) && (pw2Field.getLength() > 0) ) {
                 
-                user = new User(usernameField.getText(), njc);
+                user = new User(usernameField.getText());
                 
                 if (njc.getAndD(user.getUsername()).equals(pw0Field.getText())) {
                 
