@@ -73,6 +73,11 @@ public class ManagerFunctionsNavController implements Initializable {
         System.out.println("Customer Management Button Clicked");
         
         //display CustomerManagementPage
+        stage = (Stage)invManButton.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("CustomerManagementPage.fxml"));
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
         
     }
     
