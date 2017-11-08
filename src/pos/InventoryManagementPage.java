@@ -341,11 +341,11 @@ public class InventoryManagementPage{
         select_image_button.setText("Change Selected Item Image File");
 
         //To Manager Navigation Page Button Below
-         select_image_button.setId("select_image_button");
-        select_image_button.setLayoutX(52.0);
-        select_image_button.setLayoutY(115.0);
-        select_image_button.setMnemonicParsing(false);
-        select_image_button.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        toManagerNavPageButton.setId("select_image_button");
+        toManagerNavPageButton.setLayoutX(200.0);
+        toManagerNavPageButton.setLayoutY(350.0);
+        toManagerNavPageButton.setMnemonicParsing(false);
+        toManagerNavPageButton.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
                                 @Override
                                 public void handle(MouseEvent t){
@@ -355,19 +355,17 @@ public class InventoryManagementPage{
                                     Stage stage = (Stage)toManagerNavPageButton.getScene().getWindow();
                                     Parent root;
                                     try {
-                                        root = FXMLLoader.load(getClass().getResource("AdjustImageFilePopUp.fxml"));
+                                        root = FXMLLoader.load(getClass().getResource("ManagerFunctionsNavPage.fxml"));
                                         stage.setScene(new Scene(root));
                                     } catch (IOException ex) {
                                         Logger.getLogger(InventoryManagementPage.class.getName()).log(Level.SEVERE, null, ex);
                                     }
                                     
-                                    stage.setTitle("CustomerNinja - Select Image File");
-                                    stage.initModality(Modality.APPLICATION_MODAL);
-                                    stage.showAndWait();
+                                    stage.setTitle("CustomerNinja - Manager Navigation Page");
+                                    stage.show();
                                 }
                             });
-        select_image_button.setText("to Manager Navigation Page");
-        
+        toManagerNavPageButton.setText("to Manager Navigation Page");
         
         itemPane.getChildren().add(imageView);
         itemPane.getChildren().add(selectedItemPriceText);
