@@ -62,10 +62,10 @@ public class InventoryManagementPage{
         Button adjust_discount_button = new Button();
         Button remove_inventory_button = new Button();
         Button select_image_button = new Button();
+        //added manager nav page button
+        Button toManagerNavPageButton = new Button();
         AnchorPane root = new AnchorPane();
         GridPane gridpane = getGridPane(0);
-
-
 
         //create the menu bar
         menuBar.setId("menubar");
@@ -292,9 +292,23 @@ public class InventoryManagementPage{
         remove_inventory_button.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
                                 @Override
-                                public void handle(MouseEvent t){
+                                public void handle(MouseEvent t) {
 
                                     removeItemButtonHandler();
+                                    
+                                    //display remove item pop-up window
+                                    Stage stage = new Stage();
+                                    Parent root;
+                                    try {
+                                        root = FXMLLoader.load(getClass().getResource("RemoveItemPopUp.fxml"));
+                                        stage.setScene(new Scene(root));
+                                    } catch (IOException ex) {
+                                        System.out.println("Remove Item Pop Up Display Fail! " + ex.toString());
+                                    }
+                                    
+                                    stage.setTitle("CustomerNinja - Remove Item");
+                                    stage.initModality(Modality.APPLICATION_MODAL);
+                                    stage.showAndWait();
                                 }
                             });
         remove_inventory_button.setText("Remove Selected Item from Inventory");
@@ -326,6 +340,34 @@ public class InventoryManagementPage{
                             });
         select_image_button.setText("Change Selected Item Image File");
 
+        //To Manager Navigation Page Button Below
+         select_image_button.setId("select_image_button");
+        select_image_button.setLayoutX(52.0);
+        select_image_button.setLayoutY(115.0);
+        select_image_button.setMnemonicParsing(false);
+        select_image_button.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+                                @Override
+                                public void handle(MouseEvent t){
+
+                                    System.out.println("to Manager Nav Page Button Clicked");
+                                    //display adjust discount pop-up window
+                                    Stage stage = (Stage)toManagerNavPageButton.getScene().getWindow();
+                                    Parent root;
+                                    try {
+                                        root = FXMLLoader.load(getClass().getResource("AdjustImageFilePopUp.fxml"));
+                                        stage.setScene(new Scene(root));
+                                    } catch (IOException ex) {
+                                        Logger.getLogger(InventoryManagementPage.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                    
+                                    stage.setTitle("CustomerNinja - Select Image File");
+                                    stage.initModality(Modality.APPLICATION_MODAL);
+                                    stage.showAndWait();
+                                }
+                            });
+        select_image_button.setText("to Manager Navigation Page");
+        
         
         itemPane.getChildren().add(imageView);
         itemPane.getChildren().add(selectedItemPriceText);
@@ -342,7 +384,7 @@ public class InventoryManagementPage{
         buttonPane.getChildren().add(adjust_discount_button);
         buttonPane.getChildren().add(remove_inventory_button);
         buttonPane.getChildren().add(select_image_button);
-        
+        buttonPane.getChildren().add(toManagerNavPageButton);
         
        //problems be here
        
@@ -500,7 +542,7 @@ public class InventoryManagementPage{
         stage.showAndWait();
     };
     
-    protected static void removeItemButtonHandler(){
+    protected static void removeItemButtonHandler() {
         System.out.println("removed item");
     };
     
