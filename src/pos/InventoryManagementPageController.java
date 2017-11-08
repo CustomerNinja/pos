@@ -122,8 +122,12 @@ public class InventoryManagementPageController implements Initializable {
         
         System.out.println("Set Quantity Button Clicked");
         
+        //change slected item quantity
+        
         stage = (Stage)newQuantityField.getScene().getWindow();
         stage.close();
+        
+        
         
     }
     
@@ -167,6 +171,8 @@ public class InventoryManagementPageController implements Initializable {
         
         System.out.println("Set Discount Button Clicked");
         
+        //change selected item discount value
+        
         stage = (Stage)newDiscountField.getScene().getWindow();
         stage.close();
         
@@ -205,6 +211,8 @@ public class InventoryManagementPageController implements Initializable {
         
         System.out.println("Set Image File Button Clicked");
         
+        //change selected item image file path
+        
         stage = (Stage)newImageField.getScene().getWindow();
         stage.close();
         
@@ -215,6 +223,8 @@ public class InventoryManagementPageController implements Initializable {
         
         System.out.println("Remove Item Button Clicked");
         
+        //remove selected item from inventory
+        
         stage = (Stage)cancelButton.getScene().getWindow();
         stage.close();
         
@@ -224,6 +234,8 @@ public class InventoryManagementPageController implements Initializable {
     public void cancelButtonHandler(ActionEvent event) throws IOException {
         
         System.out.println("Cancel Remove Item Button Clicked");
+        
+        //cancel remove item (do nothing but close window)
         
         stage = (Stage)cancelButton.getScene().getWindow();
         stage.close();
