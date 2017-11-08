@@ -36,8 +36,6 @@ public class AddItemPageController{
     
     protected String IMAGE_DIRECTORY = (System.getProperty("user.dir") + System.getProperty("file.separator") + "Images");
     protected String image_filename = "";
-    protected String fileExtension = "";
-
    
     
     @FXML ImageView item_preview;

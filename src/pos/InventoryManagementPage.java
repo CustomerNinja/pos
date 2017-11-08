@@ -1,7 +1,9 @@
 package pos;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
@@ -16,14 +18,18 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import static javafx.scene.layout.Region.USE_PREF_SIZE;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import static pos.InventoryPage.ITEM_CLICKED;
+import static pos.InventoryPage.getGridPane;
+//import static pos.InventoryPage.ITEM_CLICKED;
 
 //extends the InventoryPage
 public class InventoryManagementPage{
@@ -57,6 +63,8 @@ public class InventoryManagementPage{
         Button remove_inventory_button = new Button();
         Button select_image_button = new Button();
         AnchorPane root = new AnchorPane();
+        GridPane gridpane = getGridPane(0);
+
 
 
         //create the menu bar
@@ -75,6 +83,13 @@ public class InventoryManagementPage{
         menu1.setText("Help");
         menuItem1.setMnemonicParsing(false);
         menuItem1.setText("About");
+        
+         menu.getItems().add(menuItem);
+        menuBar.getMenus().add(menu);
+        menu0.getItems().add(menuItem0);
+        menuBar.getMenus().add(menu0);
+        menu1.getItems().add(menuItem1);
+        menuBar.getMenus().add(menu1);
 
         //create the item preview pane
         previewPane.setLayoutX(720.0);
@@ -329,15 +344,131 @@ public class InventoryManagementPage{
         buttonPane.getChildren().add(select_image_button);
         
         
+       //problems be here
+       
         root.getChildren().add(menuBar);
-        root.getChildren().add(InventoryPage.getGridPane(0));
+        root.getChildren().add(gridpane);
         root.getChildren().add(buttonPane);
         root.getChildren().add(itemPane);
         root.getChildren().add(previewPane);
-        root.getChildren().add(anchorPane);
 
         Scene scene = new Scene(root,1280,720);
         return scene;
+    }
+    
+     protected static GridPane getGridPane(int inventorypointer) throws FileNotFoundException{
+        //create the gridpane and set it's layout position on the scene    
+	GridPane gridpane = new GridPane();
+        gridpane.setLayoutY(29.0);
+        NinjaConn njc = new NinjaConn();
+        Inventory inventory = new Inventory(njc);
+        LinkedList<Item> itemList = inventory.getItemList();
+      
+        //values for the rows and columns of the displayed inventory
+        int COLUMNS = 8;
+	int ROWS = 6;
+
+        //create the necessary columns and rows on the gridpane
+        for(int i = 0; i < COLUMNS; i++){
+            ColumnConstraints columnConstraints = new ColumnConstraints();
+            gridpane.getColumnConstraints().add(columnConstraints);      
+        }
+        for(int i = 0; i < ROWS; i++){
+            RowConstraints rowConstraints = new RowConstraints();
+            gridpane.getRowConstraints().add(rowConstraints);
+        }
+
+        //create the item counter to iterate through list
+        int itemCounter = 0;
+
+        //add and generate the items
+        for(int i = 0; i < ROWS; i++){
+
+            for(int j = 0; j < COLUMNS; j++){
+                //get the next item
+                if(itemCounter < itemList.size()){
+                Item currentItem = itemList.get(itemCounter);
+                    //increment the itemCounter
+                    itemCounter++;
+
+                    //the image for each of the items 80x80 pixels, also acts as the button
+                    ImageView itemButton = new ImageView();
+                    itemButton.setFitHeight(80.0);
+                    itemButton.setFitWidth(80.0);
+                    itemButton.setLayoutX(12.0);
+                    itemButton.setPickOnBounds(true);
+                    itemButton.setPreserveRatio(true);    
+
+                    //get the imagefile path for the item
+                    
+                    System.out.println((System.getProperty("user.dir") + System.getProperty("file.separator") + "Images" + System.getProperty("file.separator") + currentItem.getImagePath()));
+
+                    String imgFile = currentItem.getImagePath();
+                    FileInputStream inStreamImage = new FileInputStream(System.getProperty("user.dir") + System.getProperty("file.separator") + "Images" + System.getProperty("file.separator") + currentItem.getImagePath());
+                    Image imageObject = new Image(inStreamImage);
+                    itemButton.setImage(imageObject);
+
+                    //item panes will be 90x90 pixels
+                    Pane pane = new Pane();
+                    pane.setPrefHeight(90.0);
+                    pane.setPrefWidth(90.0);
+
+                    //create the quantity text
+                    Text quantity = new Text();
+                    quantity.setFill(javafx.scene.paint.Color.RED);
+                    quantity.setLayoutX(5.0);
+                    quantity.setLayoutY(50.0);
+                    quantity.setStroke(javafx.scene.paint.Color.WHITE);
+                    quantity.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
+                    //set quantity text
+                    quantity.setText(Integer.toString(currentItem.getQuantity()));
+                    quantity.setTextOrigin(javafx.geometry.VPos.BOTTOM);
+                    quantity.setWrappingWidth(24.85107421875);
+
+                    //create the item title
+                    Text itemTitle = new Text();
+                    itemTitle.setLayoutX(12.0);
+                    itemTitle.setLayoutY(88.0);
+                    itemTitle.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
+                    itemTitle.setStrokeWidth(0.0);
+                    //set the item title
+                    itemTitle.setText(currentItem.getName());
+
+                    //create the invisible itemID text
+                    Text itemID = new Text();
+                    itemID.setVisible(false);
+                    itemID.setText(Integer.toString(currentItem.getID()));
+
+
+                    pane.getChildren().add(itemButton);
+                    pane.getChildren().add(itemTitle);
+                    pane.getChildren().add(quantity);
+
+                    Button button = new Button("",pane);
+
+                    gridpane.add(button,j,i);
+
+                    //create the handler for the generated item
+                    pane.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+                        @Override
+                        public void handle(MouseEvent t){
+                               System.out.println("clicked item: " + currentItem.getID());
+//                            ITEM_CLICKED(Integer.toString(currentItem.getID()));
+                        }
+                    });
+
+                }
+
+            }
+        
+        }
+        njc.close();
+        gridpane.setGridLinesVisible(true);    
+        gridpane.setLayoutY(29.0);
+
+        return gridpane;
+
     }
 
     protected static void adjustPriceButtonHandler(){
@@ -359,7 +490,6 @@ public class InventoryManagementPage{
     protected void adjustDiscountButtonHandler() throws IOException{
         System.out.println("adjusted discount");
         //display adjust discount pop-up window
-//display adjust discount pop-up window
         Stage stage = new Stage();
         
         //Class<?> cl=new Object(){}.getClass().getEnclosingClass();
@@ -378,5 +508,8 @@ public class InventoryManagementPage{
         System.out.println("changed image");
     };
 
+    protected static void ITEM_CLICKED(String s){
+            System.out.println("clicked item: " + s);
+    }
 
 }

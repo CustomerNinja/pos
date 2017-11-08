@@ -128,8 +128,8 @@ public class InventoryPage{
 
                         @Override
                         public void handle(MouseEvent t){
-
-                            ITEM_CLICKED(Integer.toString(currentItem.getID()));
+                               System.out.println("clicked item: " + currentItem.getID());
+//                            ITEM_CLICKED(Integer.toString(currentItem.getID()));
                         }
                     });
 
@@ -203,8 +203,8 @@ public class InventoryPage{
                 return scene;
 
     }
-    protected static void ITEM_CLICKED(String s){
-        System.out.println("clicked item: " + s);
-    }
+//    protected static void ITEM_CLICKED(String s){
+//        System.out.println("clicked item: " + s);
+//    }
 
 }
