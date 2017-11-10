@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -25,6 +26,9 @@ import javafx.stage.Stage;
  * @author JTS
  */
 public class EmployeeManagementController implements Initializable {
+    
+    @FXML
+    private MenuBar menuBar;
     
     @FXML
     private TextField employeeIDField;
@@ -139,7 +143,7 @@ public class EmployeeManagementController implements Initializable {
 
             if (nu1Field.getText().equals(nu2Field.getText()) ) {
                 
-                user = new User(usernameField.getText(), njc);
+                user = new User(usernameField.getText());
                 
                 njc.updateDBString("tbUsers", "username", nu1Field.getText(), user.getID());
                 
@@ -190,7 +194,7 @@ public class EmployeeManagementController implements Initializable {
             
             if ( (usernameField.getLength() > 0) && (new1Field.getLength() > 0) && (new2Field.getLength() > 0) )  {
             
-                user = new User(usernameField.getText(), njc);
+                user = new User(usernameField.getText());
                    
                 if (new1Field.getText().equals(new2Field.getText())) {
                     
@@ -251,7 +255,7 @@ public class EmployeeManagementController implements Initializable {
             
             if ( (usernameField.getLength() > 0) && (pw0Field.getLength() > 0) && (pw1Field.getLength() > 0) && (pw2Field.getLength() > 0) ) {
                 
-                user = new User(usernameField.getText(), njc);
+                user = new User(usernameField.getText());
                 
                 if (njc.getAndD(user.getUsername()).equals(pw0Field.getText())) {
                 
@@ -360,6 +364,43 @@ public class EmployeeManagementController implements Initializable {
         stage.setScene(scene);
         stage.show();
         
+        
+    }
+    
+    @FXML
+    protected void signOutMenuHandler() throws IOException {
+        
+        System.out.println("Sign Out Menu Item Clicked");
+        
+        //return to LogInPage
+        stage = (Stage)menuBar.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
+        
+    }
+    
+    @FXML
+    protected void closeMenuHandler() throws IOException {
+        
+        System.out.println("Close Menu Item Clicked");
+        //close program
+        System.exit(0);
+    }
+    
+    @FXML
+    protected void aboutMenuHandler() throws IOException {
+        
+        System.out.println("About Menu Item Clicked");
+        
+        //display change name pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("AboutPopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("About Customer Ninja");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(menuBar.getScene().getWindow());
+        stage.showAndWait();
         
     }
     

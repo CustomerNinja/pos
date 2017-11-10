@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -46,10 +47,12 @@ public class ManagerFunctionsNavController implements Initializable {
         
         //display InventoryManagementPage
         stage = (Stage)invManButton.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("InventoryManagementPage.fxml"));
-        scene = new Scene(root);
+        //root = FXMLLoader.load(getClass().getResource("InventoryManagementPage.fxml"));
+        scene = InventoryManagementPage.getPage(0);
         stage.setScene(scene);
+        stage.setTitle("CustomerNinja - Inventory");
         stage.show();
+        
         
     }
     
@@ -89,5 +92,44 @@ public class ManagerFunctionsNavController implements Initializable {
         //display SalesStatsPage
         
     }
+    
+    @FXML
+    protected void signOutMenuHandler() throws IOException {
+        
+        System.out.println("Sign Out Menu Item Clicked");
+        
+        //return to LogInPage
+        stage = (Stage)invManButton.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        
+    }
+    
+    @FXML
+    protected void closeMenuHandler() throws IOException {
+        
+        System.out.println("Close Menu Item Clicked");
+        //close program
+        System.exit(0);
+    }
+    
+    @FXML
+    protected void aboutMenuHandler() throws IOException {
+        
+        System.out.println("About Menu Item Clicked");
+        
+        //display change name pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("AboutPopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("About Customer Ninja");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(invManButton.getScene().getWindow());
+        stage.showAndWait();
+        
+    }
+    
     
 } //end controller

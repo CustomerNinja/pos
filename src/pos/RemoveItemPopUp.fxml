@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pos.InventoryManagementPageController">
+   <children>
+      <Label layoutX="20.0" layoutY="75.0" text="Are You Sure You Want to Remove the Selected Item?">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="175.0" layoutY="150.0" text="Confirm or Cancel" />
+      <Button layoutX="150.0" layoutY="215.0" mnemonicParsing="false" text="Confirm" onAction="#removeItemButtonHandler" />
+      <Button fx:id="cancelButton" layoutX="250.0" layoutY="215.0" mnemonicParsing="false" text="Cancel" onAction="#cancelButtonHandler" />
+   </children>
+</Pane>

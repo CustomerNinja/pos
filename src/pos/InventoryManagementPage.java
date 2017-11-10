@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -44,6 +45,7 @@ public class InventoryManagementPage{
         MenuItem  menuItem0 = new MenuItem();
         Menu menu1 = new Menu();
         MenuItem menuItem1 = new MenuItem();
+        MenuItem logOutMenuItem = new MenuItem();
         Pane previewPane = new Pane();
         AnchorPane anchorPane = new AnchorPane();
         Pane itemPane = new Pane();
@@ -62,10 +64,10 @@ public class InventoryManagementPage{
         Button adjust_discount_button = new Button();
         Button remove_inventory_button = new Button();
         Button select_image_button = new Button();
+        //added manager nav page button
+        Button toManagerNavPageButton = new Button();
         AnchorPane root = new AnchorPane();
         GridPane gridpane = getGridPane(0);
-
-
 
         //create the menu bar
         menuBar.setId("menubar");
@@ -75,6 +77,8 @@ public class InventoryManagementPage{
         menu.setText("File");
         menuItem.setMnemonicParsing(false);
         menuItem.setText("Close");
+        logOutMenuItem.setMnemonicParsing(false);
+        logOutMenuItem.setText("Sign Out");
         menu0.setMnemonicParsing(false);
         menu0.setText("Edit");
         menuItem0.setMnemonicParsing(false);
@@ -83,12 +87,47 @@ public class InventoryManagementPage{
         menu1.setText("Help");
         menuItem1.setMnemonicParsing(false);
         menuItem1.setText("About");
-        
-         menu.getItems().add(menuItem);
+        menu.getItems().add(menuItem);
+        menuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.exit(0);
+            }
+        });
+        menu.getItems().add(logOutMenuItem);
+        logOutMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+                    Stage stage = (Stage)menuBar.getScene().getWindow();
+                    stage.setScene(new Scene(root) );
+                    stage.show();
+                } catch(Exception exc) {
+                    System.out.println("Logout Fail! " + exc.toString());
+                }
+            }
+        });
         menuBar.getMenus().add(menu);
         menu0.getItems().add(menuItem0);
         menuBar.getMenus().add(menu0);
         menu1.getItems().add(menuItem1);
+        menuItem1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage stage = new Stage();
+                Parent root;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("AboutPopUp.fxml"));
+                    stage.setScene(new Scene(root));
+                } catch (IOException ex) {
+                    System.out.println("About Page Fail! " + ex.toString());
+                }
+                stage.setTitle("About CustomerNinja");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.showAndWait();
+            }
+        });
         menuBar.getMenus().add(menu1);
 
         //create the item preview pane
@@ -292,9 +331,23 @@ public class InventoryManagementPage{
         remove_inventory_button.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
                                 @Override
-                                public void handle(MouseEvent t){
+                                public void handle(MouseEvent t) {
 
                                     removeItemButtonHandler();
+                                    
+                                    //display remove item pop-up window
+                                    Stage stage = new Stage();
+                                    Parent root;
+                                    try {
+                                        root = FXMLLoader.load(getClass().getResource("RemoveItemPopUp.fxml"));
+                                        stage.setScene(new Scene(root));
+                                    } catch (IOException ex) {
+                                        System.out.println("Remove Item Pop Up Display Fail! " + ex.toString());
+                                    }
+                                    
+                                    stage.setTitle("CustomerNinja - Remove Item");
+                                    stage.initModality(Modality.APPLICATION_MODAL);
+                                    stage.showAndWait();
                                 }
                             });
         remove_inventory_button.setText("Remove Selected Item from Inventory");
@@ -326,6 +379,32 @@ public class InventoryManagementPage{
                             });
         select_image_button.setText("Change Selected Item Image File");
 
+        //To Manager Navigation Page Button Below
+        toManagerNavPageButton.setId("select_image_button");
+        toManagerNavPageButton.setLayoutX(200.0);
+        toManagerNavPageButton.setLayoutY(350.0);
+        toManagerNavPageButton.setMnemonicParsing(false);
+        toManagerNavPageButton.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+                                @Override
+                                public void handle(MouseEvent t){
+
+                                    System.out.println("to Manager Nav Page Button Clicked");
+                                    //display adjust discount pop-up window
+                                    Stage stage = (Stage)toManagerNavPageButton.getScene().getWindow();
+                                    Parent root;
+                                    try {
+                                        root = FXMLLoader.load(getClass().getResource("ManagerFunctionsNavPage.fxml"));
+                                        stage.setScene(new Scene(root));
+                                    } catch (IOException ex) {
+                                        Logger.getLogger(InventoryManagementPage.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                    
+                                    stage.setTitle("CustomerNinja - Manager Navigation Page");
+                                    stage.show();
+                                }
+                            });
+        toManagerNavPageButton.setText("to Manager Navigation Page");
         
         itemPane.getChildren().add(imageView);
         itemPane.getChildren().add(selectedItemPriceText);
@@ -342,7 +421,7 @@ public class InventoryManagementPage{
         buttonPane.getChildren().add(adjust_discount_button);
         buttonPane.getChildren().add(remove_inventory_button);
         buttonPane.getChildren().add(select_image_button);
-        
+        buttonPane.getChildren().add(toManagerNavPageButton);
         
        //problems be here
        
@@ -500,7 +579,7 @@ public class InventoryManagementPage{
         stage.showAndWait();
     };
     
-    protected static void removeItemButtonHandler(){
+    protected static void removeItemButtonHandler() {
         System.out.println("removed item");
     };
     
