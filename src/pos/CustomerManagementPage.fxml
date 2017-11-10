@@ -4,19 +4,35 @@
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pos.CustomerManagementPageController">
-   <children>
-      <Label layoutX="340.0" layoutY="91.0" text="Customer Management">
-         <font>
-            <Font size="48.0" />
-         </font>
-      </Label>
-      <Button layoutX="262.0" layoutY="289.0" mnemonicParsing="false" text="Change Customer Name" onAction="#changeCustomerNameButtonHandler" />
-      <Button layoutX="562.0" layoutY="289.0" mnemonicParsing="false" text="Change Customer Address" onAction="#changeAddressButtonHandler" />
-      <Button layoutX="838.0" layoutY="289.0" mnemonicParsing="false" text="Change Customer Number of Sales" onAction="#changeSalesNumButtonHandler" />
-      <Button layoutX="262.0" layoutY="428.0" mnemonicParsing="false" text="Change Customer Total Sales Value" onAction="#changeSalesValButtonHandler" />
-      <Button layoutX="562.0" layoutY="428.0" mnemonicParsing="false" text="Add New Customer" onAction="#addNewCustomerButtonHandler" />
-      <Button fx:id="backToNavButton" layoutX="562.0" layoutY="567.0" mnemonicParsing="false" text="Back to Manager Navigation Page" onAction="#toManagerNavPageButtonHandler" /> 
-   </children>
-</Pane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pos.CustomerManagementPageController"> 
+    <children>
+        <MenuBar fx:id="menuBar">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Sign Out" onAction="#signOutMenuHandler"/>
+                        <MenuItem mnemonicParsing="false" text="Close" onAction="#closeMenuHandler"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" onAction="#aboutMenuHandler" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Pane> 
+              <Label layoutX="340.0" layoutY="91.0" text="Customer Management">
+                 <font>
+                    <Font size="48.0" />
+                 </font>
+              </Label>
+              <Button layoutX="262.0" layoutY="289.0" mnemonicParsing="false" text="Change Customer Name" onAction="#changeCustomerNameButtonHandler" />
+              <Button layoutX="562.0" layoutY="289.0" mnemonicParsing="false" text="Change Customer Address" onAction="#changeAddressButtonHandler" />
+              <Button layoutX="838.0" layoutY="289.0" mnemonicParsing="false" text="Change Customer Number of Sales" onAction="#changeSalesNumButtonHandler" />
+              <Button layoutX="262.0" layoutY="428.0" mnemonicParsing="false" text="Change Customer Total Sales Value" onAction="#changeSalesValButtonHandler" />
+              <Button layoutX="562.0" layoutY="428.0" mnemonicParsing="false" text="Add New Customer" onAction="#addNewCustomerButtonHandler" />
+              <Button fx:id="backToNavButton" layoutX="562.0" layoutY="567.0" mnemonicParsing="false" text="Back to Manager Navigation Page" onAction="#toManagerNavPageButtonHandler" /> 
+        </Pane>
+    </children>
+</VBox>

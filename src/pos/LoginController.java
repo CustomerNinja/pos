@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -104,5 +105,31 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    @FXML
+    protected void closeMenuHandler() throws IOException {
+        
+        System.out.println("Close Menu Item Clicked");
+        //close program
+        System.exit(0);
+    }
+    
+    @FXML
+    protected void aboutMenuHandler() throws IOException {
+        
+        System.out.println("About Menu Item Clicked");
+        Stage stage;
+        Parent root;
+        
+        //display change name pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("AboutPopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("About Customer Ninja");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(userLabel.getScene().getWindow());
+        stage.showAndWait();
+        
+    }
     
 }

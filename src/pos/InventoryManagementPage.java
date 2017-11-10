@@ -78,7 +78,7 @@ public class InventoryManagementPage{
         menuItem.setMnemonicParsing(false);
         menuItem.setText("Close");
         logOutMenuItem.setMnemonicParsing(false);
-        logOutMenuItem.setText("Logout");
+        logOutMenuItem.setText("Sign Out");
         menu0.setMnemonicParsing(false);
         menu0.setText("Edit");
         menuItem0.setMnemonicParsing(false);

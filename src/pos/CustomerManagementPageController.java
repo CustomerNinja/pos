@@ -329,4 +329,42 @@ public class CustomerManagementPageController implements Initializable {
         
     }
     
+    @FXML
+    protected void signOutMenuHandler() throws IOException {
+        
+        System.out.println("Sign Out Menu Item Clicked");
+        
+        //return to LogInPage
+        stage = (Stage)backToNavButton.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
+        
+    }
+    
+    @FXML
+    protected void closeMenuHandler() throws IOException {
+        
+        System.out.println("Close Menu Item Clicked");
+        //close program
+        System.exit(0);
+    }
+    
+    @FXML
+    protected void aboutMenuHandler() throws IOException {
+        
+        System.out.println("About Menu Item Clicked");
+        
+        //display change name pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("AboutPopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("About Customer Ninja");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(backToNavButton.getScene().getWindow());
+        stage.showAndWait();
+        
+    }
+    
+    
 }// end controller class
