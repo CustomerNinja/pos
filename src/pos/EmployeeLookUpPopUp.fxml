@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pos.EmployeeManagementController">
+   <children>
+      <Label layoutX="95.0" layoutY="75.0" text="Add New Employee:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nameField" layoutX="151.0" layoutY="119.0" />
+      <Label layoutX="26.0" layoutY="123.0" text="Employee Name :" />
+      
+      <Button layoutX="400.0" layoutY="123.0" text="Look Up Employee" onAction="#employeeLookUpHandler" />
+            
+      <Label layoutX="26.0" layoutY="165.0" text="Employee Username:" />
+      <Label fx:id="empNameLabel" layoutX="225.0" layoutY="165.0" text="" />
+      
+      <Label layoutX="26.0" layoutY="207.0" text="Employee Address:" />
+      <Label fx:id="empAddrLabel" layoutX="225.0" layoutY="207.0" text="" />
+      
+      <Label layoutX="26.0" layoutY="245.0" text="Employee Sales (Number):" />
+      <Label fx:id="empSaleNumLabel" layoutX="225.0" layoutY="245.0" text="" />
+      
+      <Label layoutX="26.0" layoutY="283.0" text="Employee Sales Value (Amount):" />
+      <Label fx:id="empSaleValLabel" layoutX="225.0" layoutY="283.0" text="" />
+      
+      <Label layoutX="26.0" layoutY="321.0" text="Employee ID Number:" />
+      <Label fx:id="empIDLabel" layoutX="225.0" layoutY="321.0" text="" /> 
+      
+      <Button layoutX="200.0" layoutY="450.0" mnemonicParsing="false" text="Done" onAction="#closeLookUpButtonHandler" />
+   </children>
+</Pane>

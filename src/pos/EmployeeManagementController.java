@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
@@ -71,6 +72,21 @@ public class EmployeeManagementController implements Initializable {
     
     @FXML
     private TextField new2Field;
+    
+    @FXML
+    private Label empNameLabel;
+    
+    @FXML
+    private Label empAddrLabel;
+    
+    @FXML
+    private Label empSaleNumLabel;
+    
+    @FXML
+    private Label empSaleValLabel;
+    
+    @FXML
+    private Label empIDLabel;
     
     protected Stage stage;
     
@@ -295,7 +311,7 @@ public class EmployeeManagementController implements Initializable {
         
         System.out.println("Add New User Button Clicked");
         
-        //display change password pop-up
+        //display add new user pop-up
         stage = new Stage();
         root = FXMLLoader.load(getClass().getResource("AddNewUserPopUp.fxml"));
         stage.setScene(new Scene(root));
@@ -349,6 +365,49 @@ public class EmployeeManagementController implements Initializable {
             stage.close();
 
         }
+    }
+    
+    @FXML
+    protected void lookUpEmployeeButtonHandler() throws IOException {
+        
+        System.out.println("Employee Look-Up Button Clicked");
+        //display look-up pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("EmployeeLookUpPopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Look Up Employee Record");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(changePermissionsButton.getScene().getWindow());
+        stage.showAndWait();
+        
+        
+        
+    }
+    
+    @FXML
+    protected void employeeLookUpHandler() throws IOException {
+        
+        System.out.println("Look Up Employee Button Clicked");
+        User emp;
+        
+        njc = new NinjaConn();
+        
+        emp = new User(nameField.getText());
+        
+        empNameLabel.setText(emp.getName());
+        empAddrLabel.setText(emp.getAddress());
+        empSaleNumLabel.setText(Integer.toString(emp.getSalesNum() ) );
+        empSaleValLabel.setText(Double.toString(emp.getSalesVal() ) );
+        empIDLabel.setText(Integer.toString(emp.getID() ) );
+        
+    }
+    
+    @FXML
+    protected void closeLookUpButtonHandler() throws IOException {
+        
+        stage = (Stage)empNameLabel.getScene().getWindow();
+        stage.close();
+        
     }
     
     public void toManagerNavPageButtonHandler(ActionEvent event) throws IOException {

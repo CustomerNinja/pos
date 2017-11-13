@@ -33,6 +33,7 @@
             <Button layoutX="838.0" layoutY="289.0" mnemonicParsing="false" text="Change Name" onAction="#changeNameButtonHandler" />
             <Button layoutX="262.0" layoutY="428.0" mnemonicParsing="false" text="Set New Password" onAction="#changePasswordButtonHandler" />
             <Button layoutX="562.0" layoutY="428.0" mnemonicParsing="false" text="Add New Employee" onAction="#addNewUserButtonHandler" />
+            <Button layoutX="838.0" layoutY="428.0" mnemonicParsing="false" text="Employee Look-Up" onAction="#lookUpEmployeeButtonHandler" />
             <Button layoutX="562.0" layoutY="567.0" mnemonicParsing="false" text="Back to Manager Navigation Page" onAction="#toManagerNavPageButtonHandler" /> 
         </Pane>
     </children>
