@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -49,6 +50,21 @@ public class CustomerManagementPageController implements Initializable {
     
     @FXML
     private TextField newSalesValField;
+    
+    @FXML
+    private Label custNameLabel;
+    
+    @FXML
+    private Label custAddrLabel;
+    
+    @FXML
+    private Label custSaleNumLabel;
+    
+    @FXML
+    private Label custSaleValLabel;
+    
+    @FXML
+    private Label custIDLabel;
     
     private Stage stage;
     
@@ -326,6 +342,49 @@ public class CustomerManagementPageController implements Initializable {
             stage = (Stage)nameField.getScene().getWindow();
             stage.close();
         }
+        
+    }
+    
+    @FXML
+    protected void lookUpCustomerButtonHandler() throws IOException {
+        
+        System.out.println("Customer Look-Up Button Clicked");
+        
+        //diaplay customer look-up pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("CustomerLookUpPopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Look Up Customer");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(backToNavButton.getScene().getWindow());
+        stage.showAndWait();
+        
+        
+    }
+    
+    @FXML
+    protected void customerLookUpHandler() throws IOException {
+        
+        Customer cust;
+        
+        njc = new NinjaConn();
+        
+        cust = new Customer(nameField.getText(),njc);
+        
+        
+        custNameLabel.setText(cust.getName());
+        custAddrLabel.setText(cust.getAddress());
+        custSaleNumLabel.setText(Integer.toString(cust.getSalesNum() ) );
+        custSaleValLabel.setText(Double.toString(cust.getSalesVal() ) );
+        custIDLabel.setText(Integer.toString(cust.getID() ) );
+        
+    }
+    
+    @FXML
+    protected void closeLookUpButtonHandler() throws IOException {
+        
+        stage = (Stage)custNameLabel.getScene().getWindow();
+        stage.close();
         
     }
     

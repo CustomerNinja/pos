@@ -32,6 +32,7 @@
               <Button layoutX="838.0" layoutY="289.0" mnemonicParsing="false" text="Change Customer Number of Sales" onAction="#changeSalesNumButtonHandler" />
               <Button layoutX="262.0" layoutY="428.0" mnemonicParsing="false" text="Change Customer Total Sales Value" onAction="#changeSalesValButtonHandler" />
               <Button layoutX="562.0" layoutY="428.0" mnemonicParsing="false" text="Add New Customer" onAction="#addNewCustomerButtonHandler" />
+              <Button layoutX="838.0" layoutY="428.0" mnemonicParsing="false" text="Customer Look-Up" onAction="#lookUpCustomerButtonHandler" />
               <Button fx:id="backToNavButton" layoutX="562.0" layoutY="567.0" mnemonicParsing="false" text="Back to Manager Navigation Page" onAction="#toManagerNavPageButtonHandler" /> 
         </Pane>
     </children>
