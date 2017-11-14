@@ -434,13 +434,13 @@ public class EmployeeManagementController implements Initializable {
         empSaleNumLabel.setText(Integer.toString(emp.getSalesNum() ) );
         empSaleValLabel.setText(Double.toString(emp.getSalesVal() ) );
         empIDLabel.setText(Integer.toString(emp.getID() ) );
+
         if (emp.getPermissions() == 1) {
             empPermLabel.setText("Manager");
         } else {
             empPermLabel.setText("Employee");
         }
-        njc.close();
-        
+        njc.close();        
     }
     
     @FXML
