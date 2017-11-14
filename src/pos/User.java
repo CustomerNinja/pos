@@ -2,6 +2,7 @@ package pos;
 
 import java.sql.ResultSet;
 import java.sql.*;
+import javafx.beans.property.SimpleStringProperty;
 
 public class User {
         
@@ -15,48 +16,73 @@ public class User {
 	//private NinjaConn njc;
 	private ResultSet rSet;
 	private final String table = "tbUSERS";
+        
+        private SimpleStringProperty idP;
+        private SimpleStringProperty nameP;
+        private SimpleStringProperty addressP;
+        private SimpleStringProperty salesNumP;
+        private SimpleStringProperty salesValP;
+        private SimpleStringProperty permissionsP;
+        private SimpleStringProperty usernameP;
 	
 	public User(int id) {
-			NinjaConn njc = new NinjaConn();
-			this.id = id;
-			//this.njc = njc;
-			//rSet = null;
-			try {
-			
-			rSet = njc.quID(this.id, this.table);
-			name = rSet.getString("name");
-			address = rSet.getString("address");
-			salesNum = rSet.getInt("sales");		
-			salesVal = rSet.getDouble("sales_val");
-			username = rSet.getString("username");
-			permissions = rSet.getInt("permissions");
-			
-			} catch (Exception ex) {
-				System.out.println("User Construct Fail!  " + ex.toString() );
-			}
-                        njc.close();
-			
+            NinjaConn njc = new NinjaConn();
+            this.id = id;
+            //this.njc = njc;
+            //rSet = null;
+            try {
+
+            rSet = njc.quID(this.id, this.table);
+            name = rSet.getString("name");
+            address = rSet.getString("address");
+            salesNum = rSet.getInt("sales");		
+            salesVal = rSet.getDouble("sales_val");
+            username = rSet.getString("username");
+            permissions = rSet.getInt("permissions");
+
+            idP = new SimpleStringProperty(Integer.toString(this.id));
+            nameP = new SimpleStringProperty(name);
+            addressP = new SimpleStringProperty(address);
+            salesNumP = new SimpleStringProperty(Integer.toString(salesNum));
+            salesValP = new SimpleStringProperty(Double.toString(salesVal));
+            permissionsP = new SimpleStringProperty(Integer.toString(permissions));
+            usernameP = new SimpleStringProperty(username);
+
+            } catch (Exception ex) {
+                    System.out.println("User Construct Fail!  " + ex.toString() );
+            } finally {
+                njc.close();
+            }
 	}
 	
 	public User(String uname) {
-		NinjaConn njc = new NinjaConn();
-		this.username = uname;
-		//this.njc = njc;
-                //rSet = null;
-		try {
-			rSet = njc.quUname(this.username, this.table);
-                        id = rSet.getInt("id");
-                        name = rSet.getString("name");
-			address = rSet.getString("address");
-			salesNum = rSet.getInt("sales");		
-			salesVal = rSet.getDouble("sales_val");
-			username = rSet.getString("username");
-			permissions = rSet.getInt("permissions");
-			
-			} catch (Exception ex) {
-				System.out.println("User Construct Fail!  " + ex.toString() );
-			}
-                njc.close();
+            NinjaConn njc = new NinjaConn();
+            this.username = uname;
+            //this.njc = njc;
+            //rSet = null;
+            try {
+                rSet = njc.quUname(this.username, this.table);
+                id = rSet.getInt("id");
+                name = rSet.getString("name");
+                address = rSet.getString("address");
+                salesNum = rSet.getInt("sales");		
+                salesVal = rSet.getDouble("sales_val");
+                username = rSet.getString("username");
+                permissions = rSet.getInt("permissions");
+                
+                idP = new SimpleStringProperty(Integer.toString(id));
+                nameP = new SimpleStringProperty(name);
+                addressP = new SimpleStringProperty(address);
+                salesNumP = new SimpleStringProperty(Integer.toString(salesNum));
+                salesValP = new SimpleStringProperty(Double.toString(salesVal));
+                permissionsP = new SimpleStringProperty(Integer.toString(permissions));
+                usernameP = new SimpleStringProperty(this.username);
+
+                } catch (Exception ex) {
+                        System.out.println("User Construct Fail!  " + ex.toString() );
+                } finally {
+                    njc.close();
+                }
 	}
 	
 	protected int getID() {
@@ -146,5 +172,33 @@ public class User {
                 }
                 njc.close();        
 	}
+        
+        public String getIdP() {
+            return idP.get();
+        }
+        
+        public String getNameP() {
+            return nameP.get();
+        }
+	
+        public String getAddressP() {
+            return addressP.get();
+        }
+        
+        public String getSalesNumP() {
+            return salesNumP.get();
+        }
+        
+        public String getSalesValP() {
+            return salesValP.get();
+        }
+        
+        public String getPermissionsP() {
+            return permissionsP.get();
+        }
+        
+        public String getUsernameP() {
+            return usernameP.get();
+        }
 	
 } //end User
