@@ -48,7 +48,8 @@ public class ManagerFunctionsNavController implements Initializable {
         //display InventoryManagementPage
         stage = (Stage)invManButton.getScene().getWindow();
         //root = FXMLLoader.load(getClass().getResource("InventoryManagementPage.fxml"));
-        scene = InventoryManagementPage.getPage(0);
+        InventoryManagementPage imp = new InventoryManagementPage();
+        scene = imp.getPage(0);
         stage.setScene(scene);
         stage.setTitle("CustomerNinja - Inventory");
         stage.show();

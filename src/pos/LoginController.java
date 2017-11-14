@@ -84,8 +84,8 @@ public class LoginController implements Initializable {
 
                Stage stage;
                Parent root;
-
-               Pos.changeScene(InventoryManagementPage.getPage(0),"CustomerNinja - Inventory");
+               InventoryManagementPage imp = new InventoryManagementPage();
+               Pos.changeScene(imp.getPage(0),"CustomerNinja - Inventory");
 
            }
         
