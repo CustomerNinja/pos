@@ -7,7 +7,10 @@ package pos;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +20,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -87,6 +92,36 @@ public class EmployeeManagementController implements Initializable {
     
     @FXML
     private Label empIDLabel;
+    
+    @FXML
+    private Label empPermLabel;
+    
+    @FXML
+    private Button genListButton;
+    
+    @FXML
+    private TableView empTable;
+    
+    @FXML
+    private TableColumn idCol;
+    
+    @FXML
+    private TableColumn nameCol;
+    
+    @FXML
+    private TableColumn addrCol;
+    
+    @FXML
+    private TableColumn salesNumCol;
+    
+    @FXML
+    private TableColumn salesValCol;
+    
+    @FXML
+    private TableColumn permCol;
+    
+    @FXML
+    private TableColumn usernameCol;
     
     protected Stage stage;
     
@@ -399,7 +434,13 @@ public class EmployeeManagementController implements Initializable {
         empSaleNumLabel.setText(Integer.toString(emp.getSalesNum() ) );
         empSaleValLabel.setText(Double.toString(emp.getSalesVal() ) );
         empIDLabel.setText(Integer.toString(emp.getID() ) );
-        
+
+        if (emp.getPermissions() == 1) {
+            empPermLabel.setText("Manager");
+        } else {
+            empPermLabel.setText("Employee");
+        }
+        njc.close();        
     }
     
     @FXML
@@ -452,7 +493,7 @@ public class EmployeeManagementController implements Initializable {
         
         System.out.println("About Menu Item Clicked");
         
-        //display change name pop-up
+        //display about pop-up
         stage = new Stage();
         root = FXMLLoader.load(getClass().getResource("AboutPopUp.fxml"));
         stage.setScene(new Scene(root));
@@ -461,6 +502,71 @@ public class EmployeeManagementController implements Initializable {
         stage.initOwner(menuBar.getScene().getWindow());
         stage.showAndWait();
         
+    }
+    
+    @FXML
+    protected void showEmployeeListButtonHandler() throws IOException {
+        
+        System.out.println("Display Employee List Pop-Up Button Clicked");
+        //display about pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("EmployeeListPopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Employee List");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(menuBar.getScene().getWindow());
+        stage.showAndWait();
+        
+    }
+    
+    @FXML
+    protected void displayEmployeeList() throws IOException {
+        
+        System.out.println("Generate List Button Clicked");
+        
+        njc = new NinjaConn();
+        //get User list
+        try {
+            ObservableList<User> tData = empTable.getItems();
+            LinkedList<User> empList = new LinkedList<User>();
+            ResultSet rSet = njc.quGetAll("tbUsers");
+            int rows = 0;
+            while (rSet.next() ) {
+                rows++;
+            }
+            System.out.println("rows= " + rows);
+            int[] idList = new int[rows];
+            rSet = njc.quGetAll("tbUsers");
+            rSet.next();
+            for (int i=0; i<rows; i++) {
+                    idList[i] = rSet.getInt("id");
+                    rSet.next();
+            }
+            //System.out.println(Arrays.toString(idList) );
+            for (int i=0; i<rows; i++) {
+                    empList.add(new User(idList[i]) );
+                    System.out.println(empList.get(i).getName());
+                    //System.out.println(custList.get(i).getAddressP());
+            }
+            //add custList to tData
+            tData.addAll(empList);
+            
+            
+        } catch (Exception exc) {
+            System.out.println("Display User List Fail! " + exc.toString());
+        } finally {
+            njc.close();
+        }
+        
+    }
+    
+    @FXML
+    protected void closeListButtonHandler() throws IOException {
+        
+        System.out.println("Close Employee List Button Clicked");
+        
+        stage = (Stage)genListButton.getScene().getWindow();
+        stage.close();
     }
     
 } //end controller

@@ -1,6 +1,7 @@
 package pos;
 
 import java.sql.ResultSet;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Customer {
 
@@ -12,6 +13,13 @@ public class Customer {
 	private NinjaConn njc;
 	private ResultSet rset;
 	private final String table = "tbCustomers";
+        
+        private SimpleStringProperty idP;
+        private SimpleStringProperty nameP;
+        private SimpleStringProperty addressP;
+        private SimpleStringProperty salesNumP;
+        private SimpleStringProperty salesValP;
+        
 	
 	public Customer(int id, NinjaConn njc) {
 		
@@ -28,6 +36,12 @@ public class Customer {
 		salesNum = rset.getInt("sales");		
 		salesVal = rset.getDouble("sales_val");
 		
+                idP = new SimpleStringProperty(Integer.toString(this.id));
+                nameP = new SimpleStringProperty(name);
+                addressP = new SimpleStringProperty(address);
+                salesNumP = new SimpleStringProperty(Integer.toString(salesNum));
+                salesValP = new SimpleStringProperty(Double.toString(salesVal));
+                
 		} catch (Exception ex) {
 			System.out.println("Customer Construct Fail!  " + ex.getLocalizedMessage() );
 		}
@@ -47,6 +61,13 @@ public class Customer {
 		address = rset.getString("address");
 		salesNum = rset.getInt("sales");		
 		salesVal = rset.getDouble("sales_val");
+                
+                idP = new SimpleStringProperty(Integer.toString(id));
+                nameP = new SimpleStringProperty(this.name);
+                addressP = new SimpleStringProperty(address);
+                salesNumP = new SimpleStringProperty(Integer.toString(salesNum));
+                salesValP = new SimpleStringProperty(Double.toString(salesVal));
+                
 		
 		} catch (Exception ex) {
 			System.out.println("Customer Construct Fail!  " + ex.getLocalizedMessage() );
@@ -112,5 +133,25 @@ public class Customer {
 		njc.updateDBDouble(this.table, "sales_val", this.salesVal, this.id);
 		
 	}
+        
+        public String getIdP() {
+            return idP.get();
+        }
+        
+        public String getNameP() {
+            return nameP.get();
+        }
 	
-}
+        public String getAddressP() {
+            return addressP.get();
+        }
+        
+        public String getSalesNumP() {
+            return salesNumP.get();
+        }
+        
+        public String getSalesValP() {
+            return salesValP.get();
+        }
+        
+}//end Customer class

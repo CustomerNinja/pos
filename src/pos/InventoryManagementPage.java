@@ -35,9 +35,9 @@ import static pos.InventoryPage.getGridPane;
 //extends the InventoryPage
 public class InventoryManagementPage{
 
-   
-
-    public static Scene getPage(int inventorypointer) throws FileNotFoundException{
+    private Text item_label;
+    
+    public Scene getPage(int inventorypointer) throws FileNotFoundException{
         MenuBar menuBar = new MenuBar();
         Menu menu = new Menu();
         MenuItem menuItem = new MenuItem();
@@ -52,7 +52,7 @@ public class InventoryManagementPage{
         ImageView imageView = new ImageView();
         Text selectedItemPriceText = new Text();
         Text selectedItemNameText = new Text();
-        Text item_label = new Text();
+        item_label = new Text();
         Text price_label = new Text();
         Text quantity_label = new Text();
         Text selectedItemStockText = new Text();
@@ -67,7 +67,7 @@ public class InventoryManagementPage{
         //added manager nav page button
         Button toManagerNavPageButton = new Button();
         AnchorPane root = new AnchorPane();
-        GridPane gridpane = getGridPane(0);
+        GridPane gridpane = getGridPane(0, item_label.getScene() );
 
         //create the menu bar
         menuBar.setId("menubar");
@@ -435,8 +435,8 @@ public class InventoryManagementPage{
         return scene;
     }
     
-     protected static GridPane getGridPane(int inventorypointer) throws FileNotFoundException{
-        //create the gridpane and set it's layout position on the scene    
+     protected GridPane getGridPane(int inventorypointer, Scene scene1) throws FileNotFoundException{
+        //create the gridpane and set it's layout position on the scene
 	GridPane gridpane = new GridPane();
         gridpane.setLayoutY(29.0);
         NinjaConn njc = new NinjaConn();
@@ -534,6 +534,7 @@ public class InventoryManagementPage{
                         public void handle(MouseEvent t){
                                System.out.println("clicked item: " + currentItem.getID());
 //                            ITEM_CLICKED(Integer.toString(currentItem.getID()));
+                                item_label.setText(currentItem.getName());
                         }
                     });
 

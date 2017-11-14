@@ -7,7 +7,10 @@ package pos;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +19,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -65,6 +70,27 @@ public class CustomerManagementPageController implements Initializable {
     
     @FXML
     private Label custIDLabel;
+    
+    @FXML
+    private Button genListButton;
+    
+    @FXML
+    private TableColumn idCol;
+    
+    @FXML
+    private TableColumn nameCol;
+    
+    @FXML
+    private TableColumn addrCol;
+    
+    @FXML
+    private TableColumn salesNumCol;
+    
+    @FXML
+    private TableColumn salesValCol;
+    
+    @FXML
+    private TableView custTable;
     
     private Stage stage;
     
@@ -414,7 +440,7 @@ public class CustomerManagementPageController implements Initializable {
         
         System.out.println("About Menu Item Clicked");
         
-        //display change name pop-up
+        //display about pop-up
         stage = new Stage();
         root = FXMLLoader.load(getClass().getResource("AboutPopUp.fxml"));
         stage.setScene(new Scene(root));
@@ -423,6 +449,71 @@ public class CustomerManagementPageController implements Initializable {
         stage.initOwner(backToNavButton.getScene().getWindow());
         stage.showAndWait();
         
+    }
+    
+    @FXML
+    protected void showCustomerListButtonHandler() throws IOException {
+        
+        System.out.println("Show Customer List Button Clicked");
+        
+        //display customer list pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("CustomerListPopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Customer List");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(backToNavButton.getScene().getWindow());
+        stage.showAndWait();
+        
+    }
+    
+    @FXML
+    protected void displayCustomerList() throws IOException {
+        
+        System.out.println("Generate List Button Clicked");
+        
+        njc = new NinjaConn();
+        //get Customer list
+        try {
+            ObservableList<Customer> tData = custTable.getItems();
+            LinkedList<Customer> custList = new LinkedList<Customer>();
+            ResultSet rSet = njc.quGetAll("tbCustomers");
+            int rows = 0;
+            while (rSet.next() ) {
+                rows++;
+            }
+            System.out.println("rows= " + rows);
+            int[] idList = new int[rows];
+            rSet = njc.quGetAll("tbCustomers");
+            rSet.next();
+            for (int i=0; i<rows; i++) {
+                    idList[i] = rSet.getInt("id");
+                    rSet.next();
+            }
+            //System.out.println(Arrays.toString(idList) );
+            for (int i=0; i<rows; i++) {
+                    custList.add(new Customer(idList[i],njc) );
+                    System.out.println(custList.get(i).getName());
+                    //System.out.println(custList.get(i).getAddressP());
+            }
+            //add custList to tData
+            tData.addAll(custList);
+            
+            
+        } catch (Exception exc) {
+            System.out.println("Display Customer List Fail! " + exc.toString());
+        } finally {
+            njc.close();
+        }
+        
+    }
+    
+    @FXML
+    protected void closeListButtonHandler() throws IOException {
+        
+        System.out.println("Close List Pop-Up Button Clicked");
+        stage = (Stage)genListButton.getScene().getWindow();
+        stage.close();
     }
     
     

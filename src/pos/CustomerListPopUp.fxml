@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pos.CustomerManagementPageController">
+   <children>
+      <Label layoutX="95.0" layoutY="75.0" text="Customer List:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="genListButton" layoutX="400.0" layoutY="75.0" defaultButton="true" text="Generate List" onAction="#displayCustomerList" />
+      <TableView scaleShape="false" editable="false" fx:id="custTable" prefHeight="300.0" prefWidth="600.0" visible="true" layoutX="50.0" layoutY="125.0">        
+        <columns>
+            <TableColumn fx:id="idCol" prefWidth="50.0" text="ID #">
+                <cellValueFactory>
+                    <PropertyValueFactory property="idP" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="nameCol" prefWidth="150.0" text="Name">
+                <cellValueFactory>
+                    <PropertyValueFactory property="nameP" />
+                </cellValueFactory>
+            </TableColumn> 
+            <TableColumn fx:id="addrCol" prefWidth="200.0" text="Address">
+                <cellValueFactory>
+                    <PropertyValueFactory property="addressP" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="salesNumCol" prefWidth="100.0" text="Sales">
+                <cellValueFactory>
+                    <PropertyValueFactory property="salesNumP" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="salesValCol" prefWidth="100.0" text="Sales Value">
+                <cellValueFactory>
+                    <PropertyValueFactory property="salesValP" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+      </TableView>    
+      <Button layoutX="200.0" layoutY="450.0" mnemonicParsing="false" text="Done" onAction="#closeListButtonHandler" />
+   </children>
+</Pane>
