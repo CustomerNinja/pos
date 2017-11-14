@@ -5,6 +5,7 @@
  */
 package pos;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -240,6 +242,19 @@ public class InventoryManagementPageController implements Initializable {
         stage = (Stage)cancelButton.getScene().getWindow();
         stage.close();
         
+    }
+    
+    @FXML
+    protected void browseForNewImageFileHandler() throws IOException {
+        
+        System.out.println("Browse for New Image File Button Clicked");
+        
+        FileChooser fc = new FileChooser();
+        
+        stage = (Stage)newImageField.getScene().getWindow();
+        File file = fc.showOpenDialog(stage);
+        
+        newImageField.setText(file.getPath());
     }
     
 } //end cotroller class
