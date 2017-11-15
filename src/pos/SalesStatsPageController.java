@@ -105,7 +105,9 @@ public class SalesStatsPageController implements Initializable {
             //add custList to tData
             tData.addAll(salesList);
             //set totalLabel to summed total
-            totalLabel.setText("$" + Double.toString(total));
+            String totalString;
+            totalString = String.format("$%.2f", total);
+            totalLabel.setText(totalString);
             
         } catch (Exception exc) {
             System.out.println("Display Customer List Fail! " + exc.toString());
