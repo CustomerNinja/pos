@@ -17,9 +17,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -42,6 +44,15 @@ public class SalesStatsPageController implements Initializable {
     
     @FXML
     private Label totalLabel;
+    
+    @FXML
+    private TextField dateField;
+    
+    @FXML
+    private TextField valueField;
+    
+    @FXML
+    private TextField nameField;
             
     private Stage stage;
     
@@ -63,11 +74,13 @@ public class SalesStatsPageController implements Initializable {
     protected void displaySalesTable() throws IOException {
         
         System.out.println("Display Sales Stats Button Clicked");
+        System.out.println(Session.getCurrentUsername());
         
         njc = new NinjaConn();
         //get Sale list
         try {
             ObservableList<Sale> tData = salesTable.getItems();
+            tData.clear();
             LinkedList<Sale> salesList = new LinkedList<Sale>();
             ResultSet rSet = njc.quGetAll("tbSales");
             int rows = 0;
@@ -152,6 +165,61 @@ public class SalesStatsPageController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Customer Ninja - Manager Functions Navigation");
         stage.show();
+        
+    }
+    
+    public void setNewSaleButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Set New Sale Button Clicked");
+        Boolean isValid = false;
+        
+        if ( (dateField.getLength() > 0) && (valueField.getLength() > 0) && (nameField.getLength() > 0) ) {
+            
+            try {
+                
+                njc = new NinjaConn();
+                
+                njc.addRowSales(dateField.getText(), Double.parseDouble(valueField.getText()), nameField.getText());
+               
+                isValid = true;
+                
+            } catch(Exception exc) {
+                System.out.println("Add New Sale Fail! " + exc.toString());
+            } finally {
+                njc.close();
+            }
+            
+        } else {
+            System.out.println("Error: All fields must include valid data!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error!");
+            alert.setContentText("Error: All fields must contain valid data");
+            alert.showAndWait();
+        }
+        
+        if (isValid) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("New Sale Added");
+            alert.setContentText("New Sale Sueccessfully Added");
+            alert.showAndWait();
+            stage = (Stage)nameField.getScene().getWindow();
+            stage.close();
+        }
+        
+    }
+    
+    public void addNewSaleButtonHandler(ActionEvent event) throws IOException {
+        
+        System.out.println("Add New Sale Button Clicked");
+        
+        //display add new sale pop-up
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("AddNewSalePopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Add New Manual Sale to Database");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(backToNavButton.getScene().getWindow());
+        stage.showAndWait();
         
     }
     

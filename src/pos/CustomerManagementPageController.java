@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -367,6 +368,10 @@ public class CustomerManagementPageController implements Initializable {
         }
         
         if (isValid) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("New Customer Added");
+            alert.setContentText("New Customer " + nameField.getText() + " Sueccessfully Added");
+            alert.showAndWait();
             stage = (Stage)nameField.getScene().getWindow();
             stage.close();
         }
@@ -478,6 +483,7 @@ public class CustomerManagementPageController implements Initializable {
         //get Customer list
         try {
             ObservableList<Customer> tData = custTable.getItems();
+            tData.clear();
             LinkedList<Customer> custList = new LinkedList<Customer>();
             ResultSet rSet = njc.quGetAll("tbCustomers");
             int rows = 0;

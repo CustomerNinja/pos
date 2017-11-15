@@ -12,6 +12,7 @@ package pos;
 public class Session {
     private boolean isAdmin = false;
     protected User currentUser;
+    private static String currentUsername;
     
     //NinjaConn connection;
     
@@ -32,6 +33,7 @@ public class Session {
 
                 //create the employee/manager object
                 currentUser = new User(aUsername);
+                setCurrentUsername(currentUser.getUsername());
                 // if the database returns admin flag then set the admin boolean
                 if(currentUser.getPermissions() == 1){
                     isAdmin = true;
@@ -53,7 +55,12 @@ public class Session {
         return isAdmin;
     }
     
-   
+   private void setCurrentUsername(String username) {
+       currentUsername = username;
+   }
     
+   protected static String getCurrentUsername() {
+       return currentUsername;
+   }
 }
 

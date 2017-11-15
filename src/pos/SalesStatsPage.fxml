@@ -28,7 +28,8 @@
                     <Font size="48.0" />
                  </font>
               </Label>
-              <Button fx:id="genListButton" layoutX="350.0" layoutY="165.0" defaultButton="true"  mnemonicParsing="false" text="Generate Sales List" onAction="#displaySalesTable" />
+              <Button layoutX="200.0" layoutY="165.0" mnemonicParsing="false" text="Enter New Correction Sale" onAction="#addNewSaleButtonHandler" /> 
+              <Button fx:id="genListButton" layoutX="450.0" layoutY="165.0" defaultButton="true"  mnemonicParsing="false" text="Generate Sales List" onAction="#displaySalesTable" />
               <TableView scaleShape="false" editable="false" fx:id="salesTable" prefHeight="400.0" prefWidth="880.0" visible="true" layoutX="200.0" layoutY="200.0">        
                 <columns>
                     <TableColumn prefWidth="50.0" text="ID #">

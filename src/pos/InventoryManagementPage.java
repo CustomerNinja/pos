@@ -66,6 +66,8 @@ public class InventoryManagementPage{
         Button select_image_button = new Button();
         //added manager nav page button
         Button toManagerNavPageButton = new Button();
+        //added to base InventoryPage button
+        Button toInventoryPageButton = new Button();
         AnchorPane root = new AnchorPane();
         GridPane gridpane = getGridPane(0, item_label.getScene() );
 
@@ -406,6 +408,21 @@ public class InventoryManagementPage{
                             });
         toManagerNavPageButton.setText("to Manager Navigation Page");
         
+        //toInventoryPageButton below
+        toInventoryPageButton.setId("toInventoryPageButton");
+        toInventoryPageButton.setLayoutX(200.0);
+        toInventoryPageButton.setLayoutY(296.0);
+        toInventoryPageButton.setMnemonicParsing(false);
+        toInventoryPageButton.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+                                @Override
+                                public void handle(MouseEvent t){
+
+                                    System.out.println("to InventoryPage Button Clicked");
+                                }
+                            });
+        toInventoryPageButton.setText("to Iventory Sales Page");
+        
         itemPane.getChildren().add(imageView);
         itemPane.getChildren().add(selectedItemPriceText);
         itemPane.getChildren().add(selectedItemNameText);
@@ -422,6 +439,7 @@ public class InventoryManagementPage{
         buttonPane.getChildren().add(remove_inventory_button);
         buttonPane.getChildren().add(select_image_button);
         buttonPane.getChildren().add(toManagerNavPageButton);
+        buttonPane.getChildren().add(toInventoryPageButton);
         
        //problems be here
        

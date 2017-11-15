@@ -133,9 +133,9 @@ public class NinjaConn {
     	}
     }
     
-    public void addRowSales(Double amount, String items, String customer) {
+    public void addRowSales(String date, Double value, String customerName) {
         try {
-    		sqlText = "INSERT INTO tbSALES VALUES(NULL, " + amount + ", \"" + items +  "\", " + customer + "\")";
+    		sqlText = "INSERT INTO tbSALES VALUES(NULL, \"" + date + "\", " + value +  ", \"" + customerName + "\")";
     		stmt.executeUpdate(sqlText);
     	} catch (Exception ex) {
     		System.out.println("Insert new Sales row fail! " + ex.toString() );
@@ -350,5 +350,5 @@ public class NinjaConn {
         
     }
     
-    
+
 } //end class
