@@ -13,11 +13,13 @@
          </font>
       </Label>
       <TextField fx:id="nameField" layoutX="151.0" layoutY="119.0" />
+
       <Label layoutX="26.0" layoutY="123.0" text="Employee Username:" />
       
       <Button layoutX="400.0" layoutY="123.0" defaultButton="true" text="Look Up Employee" onAction="#employeeLookUpHandler" />
             
       <Label layoutX="26.0" layoutY="165.0" text="Employee Name:" />
+
       <Label fx:id="empNameLabel" layoutX="225.0" layoutY="165.0" text="" />
       
       <Label layoutX="26.0" layoutY="207.0" text="Employee Address:" />
