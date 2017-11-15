@@ -302,7 +302,9 @@ public class CustomerManagementPageController implements Initializable {
                 njc = new NinjaConn();
                 
                 cust = new Customer(nameField.getText(), njc);
+                njc.close();
                 
+                njc = new NinjaConn();
                 njc.updateDBDouble("tbCustomers", "sales_val", Double.parseDouble(newSalesValField.getText() ), cust.getID() );
                 
                 isValid = true;

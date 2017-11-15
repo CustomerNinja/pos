@@ -91,6 +91,12 @@ public class ManagerFunctionsNavController implements Initializable {
         System.out.println("Sales Statistics Button Clicked");
         
         //display SalesStatsPage
+        stage = (Stage)invManButton.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("SalesStatsPage.fxml"));
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Customer Ninja - Sales Statistics");
+        stage.show();
         
     }
     

@@ -532,9 +532,9 @@ public class InventoryManagementPage{
 
                         @Override
                         public void handle(MouseEvent t){
-                               System.out.println("clicked item: " + currentItem.getID());
+                              System.out.println("clicked item: " + currentItem.getID());
 //                            ITEM_CLICKED(Integer.toString(currentItem.getID()));
-                                item_label.setText(currentItem.getName());
+                              item_label.setText(currentItem.getName());
                         }
                     });
 
