@@ -29,15 +29,37 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import static pos.InventoryPage.getGridPane;
-//import static pos.InventoryPage.ITEM_CLICKED;
 
 //extends the InventoryPage
 public class InventoryManagementPage{
 
     private Text item_label;
+    private Text price_label;
+    private Text quantity_label;
+    private Text selectedItemStockText;
+    private Text selectedItemPriceText;
+    private Text selectedItemNameText;
+    private Text selectedItemDescriptionText;
+    private int selectedItemID;
+    private ImageView imageView;
+    protected static int currItemID;
+
+    public void refreshPage() throws FileNotFoundException, Exception {
+        new Pos().changeScene(getPage(0), "CustomerNinja - Inventory Sales");
+    }
     
-    public Scene getPage(int inventorypointer) throws FileNotFoundException{
+    
+    public Scene getPage(int inventoryPointer) throws FileNotFoundException{
+        selectedItemPriceText = new Text();
+        selectedItemNameText = new Text();
+        item_label = new Text();
+        price_label = new Text();
+        quantity_label = new Text();
+        selectedItemStockText = new Text();
+        selectedItemDescriptionText = new Text();
+        imageView = new ImageView();
+
+        
         MenuBar menuBar = new MenuBar();
         Menu menu = new Menu();
         MenuItem menuItem = new MenuItem();
@@ -49,14 +71,6 @@ public class InventoryManagementPage{
         Pane previewPane = new Pane();
         AnchorPane anchorPane = new AnchorPane();
         Pane itemPane = new Pane();
-        ImageView imageView = new ImageView();
-        Text selectedItemPriceText = new Text();
-        Text selectedItemNameText = new Text();
-        item_label = new Text();
-        Text price_label = new Text();
-        Text quantity_label = new Text();
-        Text selectedItemStockText = new Text();
-        TextFlow textFlow = new TextFlow();
         Pane buttonPane = new Pane();
         Button adjustPriceButton = new Button();
         Button adjust_stock_button = new Button();
@@ -66,10 +80,8 @@ public class InventoryManagementPage{
         Button select_image_button = new Button();
         //added manager nav page button
         Button toManagerNavPageButton = new Button();
-        //added to base InventoryPage button
-        Button toInventoryPageButton = new Button();
         AnchorPane root = new AnchorPane();
-        GridPane gridpane = getGridPane(0, item_label.getScene() );
+        GridPane gridpane = getGridPane(inventoryPointer);
 
         //create the menu bar
         menuBar.setId("menubar");
@@ -156,21 +168,17 @@ public class InventoryManagementPage{
         imageView.setLayoutY(66.0);
         imageView.setPickOnBounds(true);
         imageView.setPreserveRatio(true);
-        //set the image
-       // imageView.setImage(new Image(getClass().getResource("Documents/Icon_Boost_EnergyDrink.png").toExternalForm()));
 
         selectedItemPriceText.setLayoutX(128.0);
         selectedItemPriceText.setLayoutY(91.0);
         selectedItemPriceText.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         selectedItemPriceText.setStrokeWidth(0.0);
-        selectedItemPriceText.setText("$99.99");
 
         selectedItemNameText.setId("preview_name");
         selectedItemNameText.setLayoutX(40.0);
         selectedItemNameText.setLayoutY(159.0);
         selectedItemNameText.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         selectedItemNameText.setStrokeWidth(0.0);
-        selectedItemNameText.setText("Item Name");
 
         item_label.setId("item_label");
         item_label.setLayoutX(46.0);
@@ -202,13 +210,10 @@ public class InventoryManagementPage{
         selectedItemStockText.setLayoutY(91.0);
         selectedItemStockText.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         selectedItemStockText.setStrokeWidth(0.0);
-        selectedItemStockText.setText("100");
 
-        textFlow.setId("textbox");
-        textFlow.setLayoutX(6.0);
-        textFlow.setLayoutY(163.0);
-        textFlow.setPrefHeight(92.0);
-        textFlow.setPrefWidth(531.0);
+        selectedItemDescriptionText.setId("description");
+        selectedItemDescriptionText.setLayoutX(150.0);
+        selectedItemDescriptionText.setLayoutY(145.0);
 
         buttonPane.setId("buttonpane");
         buttonPane.setLayoutX(720.0);
@@ -243,7 +248,6 @@ public class InventoryManagementPage{
                                 }
                             });
         adjustPriceButton.setText("Adjust Price");
-
         adjust_stock_button.setId("adjust_stock");
         adjust_stock_button.setLayoutX(151.0);
         adjust_stock_button.setLayoutY(57.0);
@@ -304,7 +308,7 @@ public class InventoryManagementPage{
         adjust_discount_button.setLayoutY(57.0);
         adjust_discount_button.setMnemonicParsing(false);
         adjust_discount_button.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
+        
                                 @Override
                                 public void handle(MouseEvent t){
 
@@ -333,7 +337,7 @@ public class InventoryManagementPage{
         remove_inventory_button.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
                                 @Override
-                                public void handle(MouseEvent t) {
+                                public void handle(MouseEvent t){
 
                                     removeItemButtonHandler();
                                     
@@ -408,21 +412,6 @@ public class InventoryManagementPage{
                             });
         toManagerNavPageButton.setText("to Manager Navigation Page");
         
-        //toInventoryPageButton below
-        toInventoryPageButton.setId("toInventoryPageButton");
-        toInventoryPageButton.setLayoutX(200.0);
-        toInventoryPageButton.setLayoutY(296.0);
-        toInventoryPageButton.setMnemonicParsing(false);
-        toInventoryPageButton.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-                                @Override
-                                public void handle(MouseEvent t){
-
-                                    System.out.println("to InventoryPage Button Clicked");
-                                }
-                            });
-        toInventoryPageButton.setText("to Iventory Sales Page");
-        
         itemPane.getChildren().add(imageView);
         itemPane.getChildren().add(selectedItemPriceText);
         itemPane.getChildren().add(selectedItemNameText);
@@ -430,7 +419,7 @@ public class InventoryManagementPage{
         itemPane.getChildren().add(price_label);
         itemPane.getChildren().add(quantity_label);
         itemPane.getChildren().add(selectedItemStockText);
-        itemPane.getChildren().add(textFlow);
+        itemPane.getChildren().add(selectedItemDescriptionText);
        
         buttonPane.getChildren().add(adjustPriceButton);
         buttonPane.getChildren().add(adjust_stock_button);
@@ -439,7 +428,6 @@ public class InventoryManagementPage{
         buttonPane.getChildren().add(remove_inventory_button);
         buttonPane.getChildren().add(select_image_button);
         buttonPane.getChildren().add(toManagerNavPageButton);
-        buttonPane.getChildren().add(toInventoryPageButton);
         
        //problems be here
        
@@ -453,7 +441,7 @@ public class InventoryManagementPage{
         return scene;
     }
     
-     protected GridPane getGridPane(int inventorypointer, Scene scene1) throws FileNotFoundException{
+     protected GridPane getGridPane(int inventorypointer) throws FileNotFoundException{
         //create the gridpane and set it's layout position on the scene
 	GridPane gridpane = new GridPane();
         gridpane.setLayoutY(29.0);
@@ -550,9 +538,23 @@ public class InventoryManagementPage{
 
                         @Override
                         public void handle(MouseEvent t){
-                              System.out.println("clicked item: " + currentItem.getID());
-//                            ITEM_CLICKED(Integer.toString(currentItem.getID()));
-                              item_label.setText(currentItem.getName());
+                               System.out.println("clicked item: " + currentItem.getID());
+                                currItemID = currentItem.getID();
+                                String imgFile = currentItem.getImagePath();
+                                FileInputStream inStreamImage = null;
+                            try {
+                                inStreamImage = new FileInputStream(System.getProperty("user.dir") + System.getProperty("file.separator") + "Images" + System.getProperty("file.separator") + currentItem.getImagePath());
+                            } catch (FileNotFoundException ex) {
+                                Logger.getLogger(InventoryManagementPage.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                                Image imageObject = new Image(inStreamImage);
+                                imageView.setImage(imageObject);
+                                selectedItemNameText.setText(currentItem.getName());
+                                selectedItemPriceText.setText(Double.toString(currentItem.getPrice()));
+                                selectedItemStockText.setText(Integer.toString(currentItem.getQuantity()));
+                                selectedItemDescriptionText.setText(currentItem.getDescription());
+                                selectedItemID = currentItem.getID();
+                                
                         }
                     });
 
@@ -590,7 +592,6 @@ public class InventoryManagementPage{
         //display adjust discount pop-up window
         Stage stage = new Stage();
         
-        //Class<?> cl=new Object(){}.getClass().getEnclosingClass();
         Parent root = FXMLLoader.load(getClass().getResource("AdjustDiscountPopUp.fxml"));
         stage.setScene(new Scene(root));
         stage.setTitle("Adjust Item Discount Value");

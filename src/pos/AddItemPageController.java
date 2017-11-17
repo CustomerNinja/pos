@@ -111,9 +111,11 @@ public class AddItemPageController{
         NinjaConn njc = new NinjaConn();
         new Inventory(njc).addNewItem(item_title_field.getText(), Integer.parseInt(item_quantity_field.getText()),
             Double.parseDouble(item_price_field.getText()), item_description_field.getText(), discount, image_filename);
-
+        
         njc.close();
-
+        Stage stage = (Stage)item_title_field.getScene().getWindow();
+        stage.close();
+        refreshInv();
     }
     
     //returns the image string
@@ -133,5 +135,10 @@ public class AddItemPageController{
 
         
      }
+     
+     public void refreshInv() throws Exception {
+        InventoryManagementPage imp = new InventoryManagementPage();
+        imp.refreshPage();
+    }
     
 }

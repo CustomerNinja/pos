@@ -54,6 +54,8 @@ public class InventoryManagementPageController implements Initializable {
     
     Parent root;
     
+    private NinjaConn njc;
+    
     //this will be the selected item when the GridPane select method works
     //@FXML private Item selectedItem;
     
@@ -95,8 +97,26 @@ public class InventoryManagementPageController implements Initializable {
         
         System.out.println("Set Price Button Clicked");
         
-        stage = (Stage)newPriceField.getScene().getWindow();
-        stage.close();
+        njc = new NinjaConn();
+        Boolean isValid = false;
+        
+        try {
+            
+            njc.updateDBDouble("tbInventory", "price", Integer.parseInt(newPriceField.getText()), InventoryManagementPage.currItemID);
+            
+            isValid = true;
+        } catch (Exception exc) {
+            System.out.println("Change Item Price Fail! " + exc.toString());
+        } finally {
+            njc.close();
+        }
+        
+        
+        if (isValid) {
+            
+            stage = (Stage)newPriceField.getScene().getWindow();
+            stage.close();
+        }
         
     }
     
@@ -123,12 +143,28 @@ public class InventoryManagementPageController implements Initializable {
     public void setQuantityeButtonHandler(ActionEvent event) throws IOException {
         
         System.out.println("Set Quantity Button Clicked");
+        Boolean isValid = false;
         
         //change slected item quantity
+        njc = new NinjaConn();
         
-        stage = (Stage)newQuantityField.getScene().getWindow();
-        stage.close();
+        try {
+            
+            njc.updateDBInt("tbInventory", "quantity", Integer.parseInt(newQuantityField.getText()), InventoryManagementPage.currItemID);
+            
+            isValid = true;
+            refreshInv();
+        } catch (Exception exc) {
+            System.out.println("Change Item Quantity Fail! " + exc.toString());
+        } finally {
+            njc.close();
+        }
         
+        
+        if (isValid) {
+            stage = (Stage)newQuantityField.getScene().getWindow();
+            stage.close();
+        }
         
         
     }
@@ -174,9 +210,27 @@ public class InventoryManagementPageController implements Initializable {
         System.out.println("Set Discount Button Clicked");
         
         //change selected item discount value
+        njc = new NinjaConn();
+        Boolean isValid = false;
         
-        stage = (Stage)newDiscountField.getScene().getWindow();
-        stage.close();
+        try {
+            
+            njc.updateDBInt("tbInventory", "sale_item", Integer.parseInt(newDiscountField.getText()), InventoryManagementPage.currItemID);
+            
+            isValid = true;
+            refreshInv();
+        } catch (Exception exc) {
+            System.out.println("Change Item Duscount Fail! " + exc.toString());
+        } finally {
+            njc.close();
+        }
+        
+        
+        if (isValid) {
+            
+            stage = (Stage)newDiscountField.getScene().getWindow();
+            stage.close();
+        }
         
     }
     
@@ -214,9 +268,27 @@ public class InventoryManagementPageController implements Initializable {
         System.out.println("Set Image File Button Clicked");
         
         //change selected item image file path
+        njc = new NinjaConn();
+        Boolean isValid = false;
         
-        stage = (Stage)newImageField.getScene().getWindow();
-        stage.close();
+        try {
+            
+            njc.updateDBString("tbInventory", "img_file", newImageField.getText(), InventoryManagementPage.currItemID);
+            
+            isValid = true;
+            refreshInv();
+        } catch (Exception exc) {
+            System.out.println("Change Item Duscount Fail! " + exc.toString());
+        } finally {
+            njc.close();
+        }
+        
+        
+        if (isValid) {
+            
+            stage = (Stage)newImageField.getScene().getWindow();
+            stage.close();
+        }
         
     }
     
@@ -224,12 +296,26 @@ public class InventoryManagementPageController implements Initializable {
     public void removeItemButtonHandler(ActionEvent event) throws IOException {
         
         System.out.println("Remove Item Button Clicked");
-        
+        Boolean isValid = false;
+        njc = new NinjaConn();
         //remove selected item from inventory
+        try {
+            
+            njc.rmRowInventory(InventoryManagementPage.currItemID);
+            isValid = true;
+            refreshInv();
+        } catch (Exception exc) {
+            System.out.println("Change Item Duscount Fail! " + exc.toString());
+        } finally {
+            njc.close();
+        }
         
-        stage = (Stage)cancelButton.getScene().getWindow();
-        stage.close();
         
+        if (isValid) {
+            
+            stage = (Stage)cancelButton.getScene().getWindow();
+            stage.close();
+        }
     }
     
     @FXML
@@ -257,4 +343,8 @@ public class InventoryManagementPageController implements Initializable {
         newImageField.setText(file.getPath());
     }
     
+    public void refreshInv() throws Exception {
+        InventoryManagementPage imp = new InventoryManagementPage();
+        imp.refreshPage();
+    }
 } //end cotroller class
