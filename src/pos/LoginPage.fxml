@@ -65,12 +65,12 @@
                   <Blend />
                </effect>
             </ImageView>
-            <Label layoutX="29.0" layoutY="17.0" text="Current User:">
+            <Label layoutX="29.0" layoutY="17.0" text="Sign In:">
                <font>
                   <Font name="Arial" size="23.0" />
                </font>
             </Label>
-            <Label fx:id="userLabel" layoutX="47.0" layoutY="184.0" text="R">
+            <Label fx:id="userLabel" layoutX="47.0" layoutY="184.0" text="">
                <font>
                   <Font size="18.0" />
                </font>

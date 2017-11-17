@@ -7,7 +7,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pos.EmployeeManagementController">
    <children>
-      <Label layoutX="95.0" layoutY="75.0" text="Add New Employee:">
+      <Label layoutX="95.0" layoutY="75.0" text="Employee Search:">
          <font>
             <Font size="18.0" />
          </font>

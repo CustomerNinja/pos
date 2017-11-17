@@ -70,7 +70,7 @@ public class LoginController implements Initializable {
                
 
                                 //Pos.changeScene(InventoryManagementPage.getPage(0),"CustomerNinja - Inventory");
-
+               
                Pos.changeScene(InventoryPage.getPage(),"CustomerNinja - Inventory");
 
 

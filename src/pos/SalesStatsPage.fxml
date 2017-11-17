@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.*?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pos.SalesStatsPageController"> 
+    <children>
+        <MenuBar fx:id="menuBar">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Sign Out" onAction="#signOutMenuHandler"/>
+                        <MenuItem mnemonicParsing="false" text="Close" onAction="#closeMenuHandler"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" onAction="#aboutMenuHandler" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Pane> 
+              <Label layoutX="340.0" layoutY="91.0" text="Sales Statistics">
+                 <font>
+                    <Font size="48.0" />
+                 </font>
+              </Label>
+              <Button layoutX="200.0" layoutY="165.0" mnemonicParsing="false" text="Enter New Correction Sale" onAction="#addNewSaleButtonHandler" /> 
+              <Button fx:id="genListButton" layoutX="450.0" layoutY="165.0" defaultButton="true"  mnemonicParsing="false" text="Generate Sales List" onAction="#displaySalesTable" />
+              <TableView scaleShape="false" editable="false" fx:id="salesTable" prefHeight="400.0" prefWidth="880.0" visible="true" layoutX="200.0" layoutY="200.0">        
+                <columns>
+                    <TableColumn prefWidth="50.0" text="ID #">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="idP" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn prefWidth="150.0" text="Date">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="dateP" />
+                        </cellValueFactory>
+                    </TableColumn> 
+                    <TableColumn prefWidth="200.0" text="Value">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="valueP" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn prefWidth="400.0" text="Customer Name">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="customerNameP" />
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>
+              </TableView>
+              <Label layoutX="650.0" layoutY="159.0" text="Total Sales Value:">
+                  <font>
+                      <Font size="26.0" />
+                  </font>
+              </Label>
+              <Label fx:id="totalLabel" layoutX="862.0" layoutY="159.0" text="">
+                  <font>
+                      <Font size="26.0" />
+                  </font>
+              </Label>
+              <Button fx:id="backToNavButton" layoutX="560.0" layoutY="650.0" mnemonicParsing="false" text="Back to Manager Navigation Page" onAction="#toManagerNavPageButtonHandler" /> 
+        </Pane>
+    </children>
+</VBox>

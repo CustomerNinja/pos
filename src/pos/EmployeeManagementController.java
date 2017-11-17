@@ -528,6 +528,7 @@ public class EmployeeManagementController implements Initializable {
         //get User list
         try {
             ObservableList<User> tData = empTable.getItems();
+            tData.clear();
             LinkedList<User> empList = new LinkedList<User>();
             ResultSet rSet = njc.quGetAll("tbUsers");
             int rows = 0;
